@@ -4,8 +4,12 @@ CAPx Repository
 Overview
 =========
 
+(more info coming soon!)
+
 How to Install
 ==================
+
+(more info coming soon!)
 
 Contributors 
 =======================
@@ -18,3 +22,5 @@ Contributors
 
 Release Notes
 =========
+
+(more info coming soon!)
