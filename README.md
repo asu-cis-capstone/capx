@@ -1,4 +1,3 @@
-[![Stories in Ready](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=Ready)](https://waffle.io/asu-cis-capstone/capx)
 CAPx Repository
 ==============
 
@@ -9,6 +8,10 @@ Overview
 http://arcane-crag-8303.herokuapp.com/
 
 (more info coming soon!)
+
+Product Backlog
+========
+[![Stories in Ready](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=Ready)](https://waffle.io/asu-cis-capstone/capx)
 
 How to Install
 ==================
