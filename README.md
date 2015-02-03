@@ -38,3 +38,8 @@ Release Notes
 - Added live "Hello World" demo hosted via Heroku
 - Created GitHub repo
 - Created Waffle.io Task Board
+
+**Release 0.2**
+
+- Added technology stack
+- Updated "How to Install" section
