@@ -13,7 +13,7 @@ http://arcane-crag-8303.herokuapp.com/
 
 Product Backlog
 ========
-[![Stories in Ready](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=Ready)](https://waffle.io/asu-cis-capstone/capx)
+[![Stories in Ready](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=Ready)](https://waffle.io/asu-cis-capstone/capx) [![Stories In Progress](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=In_Progress)](https://waffle.io/asu-cis-capstone/capx)
 
 How to Install
 ==================
@@ -23,10 +23,10 @@ How to Install
 Contributors 
 =======================
 
-1. Steven Truong
+1. Steve Truong
 2. Jose Recendez
 3. Alex Neumann
-4. Sneha Patel
+4. Sneha Dadhania
 5. Tom Rullestad
 
 Release Notes
