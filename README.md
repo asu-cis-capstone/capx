@@ -41,5 +41,6 @@ Release Notes
 
 **Release 0.2**
 
-- Added technology stack
+- Added technology stack diagram
+-- Test
 - Updated "How to Install" section
