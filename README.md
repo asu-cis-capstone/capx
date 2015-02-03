@@ -18,7 +18,10 @@ Product Backlog
 How to Install
 ==================
 
-(more info coming soon!)
+1. Download source from this GitHub repo
+2. Modify connection variables per a PostgreSQL DB on your Heroku page
+3. Make sure DB tables are the same as specified in source
+4. TO BE CONTINUED --------
 
 Contributors 
 =======================
@@ -42,5 +45,7 @@ Release Notes
 **Release 0.2**
 
 - Added technology stack diagram
-  - Test
+- Updated live Heroku test site
+  - Site now has HTML, CSS, & some JS
+  - Content is read from PostgreSQL DB
 - Updated "How to Install" section
