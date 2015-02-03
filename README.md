@@ -13,7 +13,7 @@ http://arcane-crag-8303.herokuapp.com/
 
 Product Backlog
 ========
-[![Stories in Ready](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=Ready)](https://waffle.io/asu-cis-capstone/capx) [![Stories In Progress](https://badge.waffle.io/asu-cis-capstone/capx.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/asu-cis-capstone/capx)
+[![Stories in Backlog](https://badge.waffle.io/asu-cis-capstone/capx.png?label=backlog&title=Backlog)](https://waffle.io/asu-cis-capstone/capx) [![Stories in Ready](https://badge.waffle.io/asu-cis-capstone/capx.png?label=ready&title=Ready)](https://waffle.io/asu-cis-capstone/capx) [![Stories In Progress](https://badge.waffle.io/asu-cis-capstone/capx.png?label=In%20Progress&title=In%20Progress)](https://waffle.io/asu-cis-capstone/capx) [![Stories in Testing](https://badge.waffle.io/asu-cis-capstone/capx.png?label=testing&title=Testing)](https://waffle.io/asu-cis-capstone/capx) [![Stories in Done](https://badge.waffle.io/asu-cis-capstone/capx.png?label=done&title=Done)](https://waffle.io/asu-cis-capstone/capx)
 
 How to Install
 ==================
