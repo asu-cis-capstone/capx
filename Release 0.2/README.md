@@ -15,4 +15,4 @@ CAPx Release 0.2 Notes
 Technology Stack Diagram
 ==========
 
-
+![Tech Stack](https://github.com/asu-cis-capstone/capx/blob/master/Release%200.2/technologyStack.png)
