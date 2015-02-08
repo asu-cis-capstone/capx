@@ -10,3 +10,9 @@ CAPx Release 0.2 Notes
   - Site now has HTML, CSS, & some JS
   - Content is read from PostgreSQL DB
 - Updated "How to Install" section
+
+
+Technology Stack Diagram
+==========
+
+
