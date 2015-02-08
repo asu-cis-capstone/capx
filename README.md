@@ -19,9 +19,8 @@ How to Install
 ==================
 
 1. Download source from this GitHub repo
-2. Modify connection variables per a PostgreSQL DB on your Heroku page
-3. Make sure DB tables are the same as specified in source
-4. TO BE CONTINUED --------
+2. Modify connection variables in the app.py file to match the connection variables in your Heroku App Database.
+![What to Edit](https://github.com/STruong1/CIS440-ScreenShots/blob/master/Images/Screen%20Shot%202015-02-08%20at%2011.47.45%20AM.png)
 
 Contributors 
 =======================
