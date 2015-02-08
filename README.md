@@ -17,6 +17,7 @@ Product Backlog
 
 How to Install
 ==================
+*Please note that these instructions assume that you have initally set up Heroku on your machine and are able to run Heroku commands from your Terminal application.*
 
 1. Download source from this GitHub repo
 2. Modify connection variables in the app.py file to match the connection variables in your Heroku App Database.
