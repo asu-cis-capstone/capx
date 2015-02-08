@@ -23,7 +23,7 @@ How to Install
 2. Modify connection variables in the app.py file to match the connection variables in your Heroku App Database.
 ![What to Edit](https://github.com/STruong1/CIS440-ScreenShots/blob/master/Images/Screen%20Shot%202015-02-08%20at%2011.47.45%20AM.png)
 3. Connect to your Heroku Database using PGAdmin and run the SQL statements found in CAPxSQL.sql to create the necessary tables needed for the app.
-4. In a new Terminal window, cd to the Release 0.2 directory and fun the folling commands: ***git init, git add -A, git commit -m 'some comment here', heroku create, git push heroku master***
+4. In a new Terminal window, cd to the Release 0.2 directory and run the following commands: ***git init, git add -A, git commit -m 'some comment here', heroku create, git push heroku master***
 5. Now navigate to your *Heroku Dashboard > Personal Apps* and a new app should be available in the *Personal Apps* list. 
 
 Contributors 
