@@ -17,7 +17,7 @@ Product Backlog
 
 How to Install
 ==================
-*Please note that these instructions assume that you have initally set up Heroku on your machine and are able to run Heroku commands from your Terminal application.*
+*Please note that these instructions assume that you have initally set up Heroku with Python on your machine and are able to run Heroku commands from your Terminal application. Please visit [Getting Started with Heroku & Python](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) if this has not been set up. Follow the setup instructions through installing the Heroku ToolBelt, which will allow you to use Heroku commands within your terminal application.*
 
 1. Download source from this GitHub repo
 2. Modify connection variables in the app.py file to match the connection variables in your Heroku App Database.
