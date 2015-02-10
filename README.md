@@ -20,11 +20,12 @@ How to Install
 *Please note that these instructions assume that you have initally set up Heroku with Python on your machine and are able to run Heroku commands from your Terminal application. Please visit [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) if this has not been set up. Follow the setup instructions through installing the Heroku ToolBelt, which will allow you to use Heroku commands within your terminal application.*
 
 1. Download source from this GitHub repo
-2. Modify connection variables in the app.py file to match the connection variables in your Heroku App Database.
+2. Create a database on Heroku via your Heroku profile.
+3. Using PGAdmin, connect to your Heroku database and modify the following line of code in the app.py file located in the Release 0.2 folder, to match your Heroku database variables.
 ![What to Edit](https://github.com/STruong1/CIS440-ScreenShots/blob/master/Images/Screen%20Shot%202015-02-08%20at%2011.47.45%20AM.png)
-3. Connect to your Heroku Database using PGAdmin and run the SQL statements found in CAPxSQL.sql to create the necessary tables needed for the app.
-4. In a new Terminal window, cd to the Release 0.2 directory and run the following commands: ***git init, git add -A, git commit -m 'some comment here', heroku create, git push heroku master***
-5. Now navigate to your *Heroku Dashboard > Personal Apps* and a new app should be available in the *Personal Apps* list. 
+4. With PGAdmin, use the CAPxSQL.sql file found in the Release 0.2 folder to create the correct table, with it's attributes, and some dummy data on your Heroku database from steps 2-3.  
+5. In a new Terminal window, cd to the Release 0.2 directory and run the following commands: ***git init, git add -A, git commit -m 'some comment here', heroku create, git push heroku master***
+6. Now navigate to your *Heroku Dashboard > Personal Apps* and a new app should be available in the *Personal Apps* list. 
 
 Contributors 
 =======================
