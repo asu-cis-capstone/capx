@@ -23,7 +23,7 @@ How to Install
 2. Create a database on Heroku via your Heroku profile.
 3. Using PGAdmin, connect to your Heroku database and modify the following line of code in the app.py file located in the Release 0.2 folder, to match your Heroku database variables.
 ![What to Edit](https://github.com/STruong1/CIS440-ScreenShots/blob/master/Images/Screen%20Shot%202015-02-08%20at%2011.47.45%20AM.png)
-4. With PGAdmin, use the CAPxSQL.sql file found in the Release 0.2 folder to create the correct table, with it's attributes, and some dummy data on your Heroku database from steps 2-3.  
+4. With PGAdmin, use the CAPxSQL.sql file found in the Release 0.2 folder to create the correct table, with its attributes, and some dummy data on your Heroku database from steps 2-3.  
 5. In a new Terminal window, cd to the Release 0.2 directory and run the following commands: ***git init, git add -A, git commit -m 'some comment here', heroku create, git push heroku master***
 6. Now navigate to your *Heroku Dashboard > Personal Apps* and a new app should be available in the *Personal Apps* list. 
 
