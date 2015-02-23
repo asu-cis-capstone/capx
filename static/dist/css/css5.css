@@ -1,7 +1,10 @@
 /* 
 css5.css
-used for: CAPx CIS 440 Project
+used for: courseDetail.html
  */
+
+
+/* Big Gray box around page content. Changing radius to 0px makes it have sharp corners */
 
 .navbar-default{
 	margin-bottom: 0px;
@@ -49,7 +52,7 @@ navbar-brand.a{
 }
 
 .move-right{
-	margin-left: 100px !important;
+	margin-left: 340px !important;
 }
 
 .move-right2{
@@ -72,13 +75,6 @@ navbar-brand.a{
 	border-top: 2px solid #b8d073;
 }
 
-/*
-lighterblack:  3f3f3f
-darkerblack: 030303
-
-testing:  4c4c4c  /  272727
-			383838 /  272727
-*/
 #section1{
 	background-image: -webkit-linear-gradient(top, #3f3f3f 0%, #030303 100%);
 	background-image:      -o-linear-gradient(top, #3f3f3f 0%, #030303 100%);
@@ -109,47 +105,16 @@ body{
 }
 
 
-/* NEW STUFF HERE
-green text-color: #b8d073
-blue: #84b8ff   or 86c1ff
- */
-.customColor{
-	color: #b8d073 !important;
-}
- 
-.btnCustom{
-	width: 220px;
-	font-size: 100%;
-	border-radius: 0px;
-	line-height: 31px;
-	color: #b8d073 !important;
-	text-shadow: none;
-	border: none !important;
-	background-image: -webkit-linear-gradient(top, #3f3f3f 0%, #030303 100%) !important;
-	background-image:      -o-linear-gradient(top, #3f3f3f 0%, #030303 100%)!important;
-	background-image: -webkit-gradient(linear, left top, left bottom, from(#3f3f3f), to(#030303))!important;
-	background-image:         linear-gradient(to bottom, #3f3f3f 0%, #030303 100%)!important;
-	text-align: left;
-	height: 52px;
-	box-shadow: none;
-}
-
-.btnCustom:hover{
-	background-image: none !important;
-	background-color: #b8d073;
-	color: #2a2a2a !important;
-}
- 
+/* NEW STUFF HERE */
 .panelHeaderBlack{
 	background-image: -webkit-linear-gradient(top, #3f3f3f 0%, #030303 100%) !important;
-	background-image:      -o-linear-gradient(top, #3f3f3f 0%, #030303 100%)!important;
+	background-image:      -o-linear-gradient(top, #3f3f3f 0%, #030303 100%) !important;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#3f3f3f), to(#030303))!important;
 	background-image:         linear-gradient(to bottom, #3f3f3f 0%, #030303 100%)!important;
 	color: #b8d073 !important;
-	font-size: 120%;
+	font-size: 125%;
 	border-radius: 0px;
-	padding-bottom: 4px;
-	padding-top: 4px;
+
 	}
 
 .projectUpvote{

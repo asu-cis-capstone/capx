@@ -11,7 +11,6 @@
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap-theme.css" />
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/css5.css" />
-	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap-social.css" />
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
 	
@@ -47,12 +46,24 @@
 										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 										  <ul class="nav navbar-nav move-right2">
-											<li class="navbarlist navitems"><a href="#"><!--<span class="glyphicon glyphicon-home msgtext" aria-hidden="true"></span>-->Home</a></li>
-											<li class="navbarlist active-tab active1 navitems"><a href="#">Projects<span class="sr-only">(current)</span></a></li>
-											<li class="navbarlist navitems"><a href="#">Showroom</a></li>
-											<li class="navbarlist navitems"><a href="#">Contact</a></li>
-											<li class="navbarlist navitems"><a href="#">About</a></li>
+											<li class="navbarlist navitems"><a href="index.html"><!--<span class="glyphicon glyphicon-home msgtext" aria-hidden="true"></span>-->Home</a></li>
+											<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<strong class="caret"></strong></a>
+											<ul class="dropdown-menu">
+											<li>
+											<a href="projects.html">Projects</a>
+											</li>
+											</li>
+											<li>
+											<a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#contact" data-original-title>Submit Project</a>
+											
+											</li>
+											</ul>
+											<li class="navbarlist navitems"><a href="showroom.html">Showroom</a></li>
+											
+											<li class="navbarlist navitems"><a href="about.html">About</a></li>
 										  </ul>
+										  
 										  
 										  <ul class="nav navbar-nav navbar-right ">
 											<p class="navbar-text" style="color: #dedede";>Signed in as  {% print error %}</p>
@@ -84,5 +95,137 @@
 	</div>
 		
 
+		
+	<!-- form start  -->	
+	
+	<div class="container">
+		<div class="row">
+		<br/><br/><br/>
+        
+       
+        </a>
+        <div class="modal fade" id="contact" tabindex="-1" role="dialog" aria-labelledby="contactLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h4 class="panel-title" id="contactLabel"><span class="glyphicon glyphicon-info-sign"></span> Project Submit Form.</h4>
+                    </div>
+                    <form action="#" method="post" accept-charset="utf-8">
+                    <div class="modal-body" style="padding: 5px;">
+					
+							<div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <a href="../static/projectreq.jpg" target="_blank">Guide lines for suitable projects</a>
+                                </div>
+                            </div>
+					
+                          <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="firstname" placeholder="First name" type="text" title="Name: 4-30 chars, u/l case letters and - or ' only!" required autofocus pattern="[a-zA-Z-' ]{4,30}" />
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="lastname" placeholder="Last name" type="text" title="Last name: 4-30 chars, u/l case letters and - or ' only!" required pattern="[a-zA-Z-' ]{4,30}"/>
+                                </div>
+                            </div>
+							
+							<div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="email" placeholder="E-mail" type="text" title="E-mail: example@google.com" required maxlength="50" />
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="phone" placeholder="Phone #"  type="tel" title="Phone: ex 555-555-5555" maxlength="10"/>
+                                </div>
+                            </div>
+							
+							
+							
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="company" placeholder="Company name" type="text" required  pattern="[a-zA-Z-' ]{4,30}"/>
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="project" placeholder="Project name" type="text" required />
+									
+                                </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <textarea style="resize:vertical;" class="form-control" maxlength="500" placeholder="Brief Project description" rows="6" name="comment" required></textarea>
+                                </div>
+                            </div>
+							
+							<div class="row">
+							<div class="form-group">
+								<div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 1px;">
+                               <label class=" control-label"textarea style="resize:vertical;" for="checkboxes">Tools used:   (max of five)</label>
+								<div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;"">
+								<label class="checkbox-inline" for="checkboxes-0">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-0" value="1" type="checkbox">
+								HTML
+								</label>
+								<label class="checkbox-inline" for="checkboxes-1">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-1" value="2" type="checkbox">
+								CSS
+								</label>
+								<label class="checkbox-inline" for="checkboxes-2">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-2" value="3" type="checkbox">
+								C#
+								</label>
+								<label class="checkbox-inline" for="checkboxes-3">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-3" value="4" type="checkbox">
+								SQL
+								</label>
+								<label class="checkbox-inline" for="checkboxes-3">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-4" value="5" type="checkbox">
+								JavaScript
+								</label>
+								<label class="checkbox-inline" for="checkboxes-5">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-5" value="6" type="checkbox">
+								C++
+								</label>
+								<label class="checkbox-inline" for="checkboxes-6">
+								<input name="checkboxes" textarea style="resize:vertical;"id="checkboxes-6" value="7" type="checkbox">
+								Python
+								</label>
+							  
+                            </div>
+								
+                            </div>
+							
+							</div>
+                         </div>
+						 <div class="form-group">
+							<label class=" control-label" for="filebutton">Company Logo:</label>
+								<div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+								<input id="filebutton" name="filebutton" class="input-file" type="file">
+								</div>
+							</div>
+							
+							
+                        </div>  
+                        <div class="panel-footer" style="margin-bottom:-14px;">
+                            <input type="submit" class="btn btn-success" value="Send"/>
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                            <input type="reset" class="btn btn-danger" value="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                            <button style="float: right;" type="button" class="btn btn-default btn-close" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        
+        
+	</div>
+   
+    
+</div>
+	  <!-- end of form  -->	
+		
   </body>
 </html>

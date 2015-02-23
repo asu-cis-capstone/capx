@@ -1,20 +1,14 @@
-import psycopg2, requests, json
-from flask.ext.github import GitHub
+import psycopg2
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 
-
-conn = psycopg2.connect(database="name", user="username", password="pw", host="hostString", port="portnumber")
+conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="MODIFY")
 cur = conn.cursor()
 cur2 = conn.cursor()
 
 voteArray =[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 
 app = Flask(__name__)
-app.config['GITHUB_CLIENT_ID'] = 'INSERT YOUR CLIENT ID HERE'
-app.config['GITHUB_CLIENT_SECRET'] = 'INSERT YOUR CLIENT SECRET HERE'
-app.secret_key = 'AAA0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
-
-github = GitHub(app)
+app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT' #DO NOT CHANGE
 
 @app.route('/', methods = ['GET', 'POST'])
 def home():
@@ -23,60 +17,18 @@ def home():
 	return render_template("welcome.html", rows=rows, cur2=cur2, conn=conn)
 
 # LOGIN ROUTES
-@app.route('/login')
+@app.route('/login.html', methods = ['GET', 'POST'])
 def login():
-    return github.authorize()
-	
-
-	
-@app.route('/welcome', methods = ['GET', 'POST'])
-@github.authorized_handler
-def authorized(oauth_token): 
-	cur2.execute("SELECT usertoken FROM users WHERE usertoken= %(oauth)s;", {'oauth': oauth_token})
-	user = cur2.fetchone()
-
-	if user is None:
-		cur2.execute("INSERT into users VALUES (%(oauth)s)", {'oauth': oauth_token})
-		conn.commit()	
-	
-	# short script for parsing out the User Name from GitHub request
-	j = requests.get('https://api.github.com/user?access_token=' + oauth_token)
-	j = j.text
-
-	i = 0
-	text = ""
-	quoteCount = 0
-	beginning = 0
-	end = 0
-	userName = ""
-
-	while quoteCount < 4:
-		text = text + j[i]
-		if j[i] == '"':
-			quoteCount = quoteCount + 1
-		if quoteCount == 3 and j[i] == '"':
-			beginning = i
-		if quoteCount == 4:
-			end = i
-		i = i + 1
-
-	while beginning < end - 1:
-		userName = userName + (j[beginning+1])
-		beginning = beginning + 1
-	
-	cur2.execute("UPDATE users SET githubname =  %(gitname)s WHERE usertoken = %(oauth)s;", {'gitname': userName, 'oauth': oauth_token})
-	conn.commit()
-		
-	return render_template("GitHubTest.html", userName=userName)
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	error = None
+	if request.method == 'POST':
+		if (request.form['username'] != 'admin') \
+				or request.form['password'] != 'admin':
+			error = 'Invalid Credentials. Please try again.'
+		else:
+			session['logged_in'] = True
+			error = 'Admin'
+			return render_template('login.html', error=error)
+		return render_template('login.html', error=error)
 	
 # ROUTES FOR RATING SYSTEM. can be improved in the future
 	
