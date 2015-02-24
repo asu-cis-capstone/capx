@@ -20,7 +20,7 @@ Product Backlog
  
 
 How to Install (without GitHub Login)
- ==================
+==================
 Please note that these instructions assume that you have initally set up Heroku with Python on your machine and are able to run Heroku commands from your Terminal application. Please visit [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python#introduction) if this has not been set up. Follow the setup instructions through installing the Heroku ToolBelt, which will allow you to use Heroku commands within your terminal application.*
  
 1. Download source from this GitHub repo
