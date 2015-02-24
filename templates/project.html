@@ -1,0 +1,102 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+{% with msgs = get_flashed_messages() %}
+        {% if msgs %}
+          {%- for msg in msgs %}
+			{% if msg == 'You already voted for this project!' %}
+				<div class="alert alert-danger text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+			{% if msg == 'You successfully voted for this project!' %}
+				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+          {% endfor -%}
+        {% endif %}
+      {% endwith %}
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">Projects 
+	
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+		
+<div class="container-fluid addPadding">
+	{% for row in rows: %}
+		<div class="row">		
+		<div class="col-md-12">
+		<div class="container">
+		<div class="row panelshadow" style="background-color: #fff">
+		<div class="panel panel-default panelborder">
+		<!-- Default panel contents -->
+			<div class="panel-heading panelHeaderBlack ">{% print row[1] %}<hr style="margin: 0px; padding: 0px;"></div>
+				<table class="panelshadow">
+					<div class="col-md-1 projectUpvote">								
+						<form id="upvoteForm" action="/upvote" method="post">
+							<input type="hidden" id="upvote" name="upvote" value="{% print row[0] %}" />
+							<input type="image" src="../static/upvote_inactive.png" alt="Submit button" 
+							onmouseover="this.src='../static/upvote_active.png';" onmouseout="this.src='../static/upvote_inactive.png';"
+							/>
+							<!--<input type="submit" value="Upvote!" />-->
+								
+							</form>
+							
+							</br>
+							<span class="rating" style="padding-left: 13px;">{% print row[4] %}</span>
+								
+						<form id="downvoteForm" action="/downvote" method="post">
+								<input type="hidden" id="downvote" name="downvote" value="{% print row[0] %}" />
+								<input type="image" src="../static/downvote_inactive.png" alt="Submit Form" 
+								onmouseover="this.src='../static/downvote_active.png';" onmouseout="this.src='../static/downvote_inactive.png';"
+								/>
+								<!--<input type="submit" value="Downvote!" />-->
+								
+						</form>								
+					</div>
+					<div class="col-md-8 projectDescription">
+						<div class="row">
+							<div class="col-md-12 projectDescription">
+							<p>{% print row[2] %}</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 projectComments">
+								<a class="showComment">View Dr. Clark's Comments</a>
+								<div class="hideNew" style="display: none;">
+									{% print row[3] %}
+								</div>
+							<div id="insert{%print row[0] %}"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3 projectPicture">
+						<p>Company Logo Here</p>
+					</div>
+				</table>
+		</div>
+		</div>
+		</div>
+			{% endfor %}
+				</div>
+			</div>
+	</div>
+		
+	<script>
+		$(function() {
+			$('.showComment').click(function(e) {
+				$(event.target).next().fadeToggle()
+			});
+		});
+	</script>	
+
+{% endblock %}	
