@@ -65,3 +65,12 @@ Release Notes
   - Site now has HTML, CSS, & some JS
   - Content is read from PostgreSQL DB
 - Updated "How to Install" section
+
+**Release 0.3**
+ 
+- Link to Google Form used for User Survey: http://goo.gl/forms/TEXaZuHtb6
+- Updated the CAPx Test Site (capxtest.herokuapp.com)
+ - Added content to "About & Contact" page
+ - Added content to "Home" page
+ - Added GitHub Login functionality
+ - Fixed the Up/Down Vote issues 
