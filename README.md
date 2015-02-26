@@ -74,3 +74,4 @@ Release Notes
  - Added content to "Home" page
  - Added GitHub Login functionality
  - Fixed the Up/Down Vote issues 
+  - User must be logged in to vote
