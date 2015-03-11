@@ -15,31 +15,27 @@
 			</div>
 	</div>
 	
+
+	
 	<div class="container" style="padding-top: 12px; background-color: #fff">
 			<div class="row">
 				<div class="col-md-8">
+				{% for row in blogs: %}
 					<div class="panel panel-default">
 						<div class="panel-heading">
 							<div class="row">
-								<div class="col-md-9">
-									<h3 class="panel-title">CIS 440 Beta Launch! </h3>
+								<div class="col-md-6">
+									<h3 class="panel-title">{% print row[1] %}</h3>
 								</div>
-								<div class="col-md-3" style="text-align: right;">Posted Feb. 22, 2015
+								<div class="col-md-6" style="text-align: right;">Posted by {% print row[3] %} on {% print row[4] %}
 								</div>
 							</div>
 						</div>
 						<div class="panel-body">
-							Welcome to CIS 440! </br>
-							The site will allow both students and companies to post project opportunities. In addition, 
-							there will be an area that shows various past projects. Students will be able to view all available 
-							projects and rank them with a up/downvote system. Students will also be able to signup for projects 
-							directly on the site. Each project will have information provided by the company as well as Dr. Clark's 
-							comments. Additionally, each project will have Tags, giving a quick overview of the desired coding language, 
-							required technologies and other characteristics.
-							</br></br>
-							Contributors: Dr. Clark, Steve Truong, Alex Neumann, Jose Recendez, Sneha Dadhania & Tom Rullestad
+							<p>{% print row[2] %}</p>
 						</div>
 					</div>
+				{% endfor %}
 				</div>
 				<div class="col-md-4">
 					<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/ASU" data-widget-id="569602141166133248">Tweets by @ASU</a>
@@ -49,4 +45,5 @@
 				</div>
 			</div>
 	</div>
+	
 {% endblock %}

@@ -3,26 +3,11 @@
 {% with msgs = get_flashed_messages() %}
         {% if msgs %}
           {%- for msg in msgs %}
-			{% if msg == 'You already upvoted this project!' %}
-				<div class="alert alert-danger text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
-				  {{ msg }}
-				</div>
-			{% endif %}
-			{% if msg == 'You already downvoted this project!' %}
-			<div class="alert alert-danger text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
-				  {{ msg }}
-				</div>
-			{% endif %}
-			{% if msg == 'You successfully voted for this project!' %}
+			{% if msg == 'You successfully approved a project!' %}
 				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
 				  {{ msg }}
 				</div>
 			{% endif %}
-			{% if msg == 'You now have a neutral vote for this project!' %}
-				<div class="alert alert-info text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
-				  {{ msg }}
-				</div>
-			{% endif %}			
           {% endfor -%}
         {% endif %}
       {% endwith %}
@@ -32,44 +17,23 @@
 					<div class="container">
 							<div class="row">
 							
-								<p class="header6">Projects 
-	
+								<p class="header6">
+										<a href="adminpanel">Back to Admin Panel</a>
 								</p>
 							</div>
 					</div>
 				</div>
 			</div>
 	</div>
-		
-<div class="container-fluid">
-	{% for row in rows: %}
-		<div class="container">
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>Projects requiring approval:</h3>
+				{% for row in pending: %}
+				<div class="container">
 			<div class="row">
-				<div class="col-md-1" style="padding-right: 0px; padding-left: 40px;">								
-						<form id="upvoteForm" action="/upvote" method="post">							
-							<input type="hidden" id="upvote" name="upvote" value="{% print row[0] %}" />
-							<input type="image" src="../static/upvote_active2.png" alt="Submit button" 
-							onmouseover="this.src='../static/upvote_active3.png';" onmouseout="this.src='../static/upvote_active2.png';"
-							/>
-							<!--<input type="submit" value="Upvote!" />-->
-								
-						</form>
-							
-						<span class="rating" style="padding-left: 13px;">{% print row[4] %}</span>
-								
-						<form id="downvoteForm" action="/downvote" method="post">
-								<input type="hidden" id="downvote" name="downvote" value="{% print row[0] %}" />
-								<input type="image" src="../static/downvote_inactive2.png" alt="Submit Form" 
-								onmouseover="this.src='../static/downvote_active2.png';" onmouseout="this.src='../static/downvote_inactive2.png';"
-								/>
-								<!--<input type="submit" value="Downvote!" />-->
-								
-						</form>								
-
 				
-				
-					
-				</div>
 		<div class="col-md-11">
 		<div class="row panelshadow" style="background-color: #fff">
 		<div class="panel panel-default panelborder">
@@ -78,13 +42,7 @@
 				<table class="panelshadow">
 					<div class="col-md-2 projectPicture">
 						<div class="row">
-							<!-- <div class="col-md-6 extrainfo">
-							<p>SparkOpenResearch.com</p>
-							</div>
-							<div class="col-md-6">
-								<img class="companylogo" align="right" src="../static/projecttest1.png" alt="project" />
-								
-							</div> -->
+							
 							<div class="col-md-12" style="text-align: right;">
 								<img class="companylogo" align="left" src="../static/projecttest1.png" alt="project" />
 							</div>
@@ -125,17 +83,34 @@
 		</div>
 		</div>
 		</div>
-			{% endfor %}
+		<div class="col-md-12">								
+					<form action="/addcomment" method="post" name="addcomment"accept-charset="utf-8">
+                    <div class="modal-body" style="padding: 5px;">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8" style="margin-right: -20px;">
+									<input type="hidden" id="comment" name="commentid" value="{% print row[0] %}" />
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Add your comment here..." rows="2" name="addedcomment" required></textarea>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4">
+								<input type="submit" class="btn btn-success" value="Approve"/>
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+								<input type="reset" class="btn btn-danger" value="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+								</div>
+                            </div>
+					
+                       </div>  
+                       
+					</form>							
 				</div>
-			</div>
-	</div>
 		
-	<script>
-		$(function() {
-			$('.showComment').click(function(e) {
-				$(event.target).next().fadeToggle()
-			});
-		});
-	</script>	
-
-{% endblock %}	
+				
+			</div>
+		</div>
+		<hr>
+		{% endfor %}
+	</div>
+	
+	
+	
+{% endblock %}

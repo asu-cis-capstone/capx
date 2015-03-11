@@ -11,7 +11,9 @@
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap.min.css" />
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap-theme.css" />
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/css5.css" />
+	<link type="text/css" rel="stylesheet" href="../static/dist/css/hover.css" />
 	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap-social.css" />
+	<link type="text/css" rel="stylesheet" href="../static/font-awesome-4.3.0/css/font-awesome.css" />
 	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans" />
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
 	
@@ -41,19 +43,23 @@
 											<span class="icon-bar"></span>
 											<span class="icon-bar"></span>
 										  </button>
-										  <a class="navbar-brand" href="#"><img style="max-height: 45px; margin-top: -13px; padding: none;" src="../static/logo3.png" alt="logo1"/></a>
+										  <a class="navbar-brand" href="#"><img style="max-height: 45px; margin-top: -13px; padding: none;" src="../static/logo3blue.png" alt="logo1"/></a>
 										</div>
 										<!-- Collect the nav links, forms, and other content for toggling -->
 										<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 										  <ul class="nav navbar-nav move-right">
 											<li class="navbarlist {{ homeStatus }} navitems"><a href="/">Home</a></li>
-											<li class="navbarlist {{ projectStatus }} navitems"><a href="projects">Projects<span class="sr-only">(current)</span></a></li>
+											<li class="navbarlist {{ projectStatus }} navitems"><a href="projects">Projects</a></li>
+											<li class="navbarlist {{ addprojectStatus }} navitems"><a href="addproject">Propose Project</a></li>
 											<li class="navbarlist {{ showroomStatus }} navitems"><a href="showroom">Showroom</a></li>
-											<li class="navbarlist {{ aboutStatus }} navitems"><a href="about">About</a></li>
+											<li class="navbarlist {{ aboutStatus }} navitems"><a href="about">About & Contact</a></li>
+											{% if admin == 'yes' %}
+											<li class="navbarlist {{ adminStatus }} navitems"><a href="adminpanel">Admin</a></li>
+											{% endif %}
 										  </ul>
 										  
 										  <ul class="nav navbar-nav navbar-right ">
-											<p class="navbar-text customColor">Signed in as {{ userName }}</p>
+											<i class="fa fa-github fa-2x pull-left" style="color: #84b8ff; padding-top: 12px;" ></i><p class="navbar-text customColor">{{ userName }}</p>
 											<li class="navbarlist navitems"><a href="logout">Logout</a></li>
 										  </ul>
 										</div><!-- /.navbar-collapse -->
@@ -69,6 +75,15 @@
 	{% block content %}
 	
 	{% endblock %}
+	
+		<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<hr style="margin-top: 50px;">
+				<p class="copyright">Copyright © 2015 CIS440.com</p>
+			</div>
+		</div>
+	</div>
 	
 </body>
 

@@ -1,0 +1,53 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										Admin Panel
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container">
+		<div class="row animation">
+			<a href="adminBlog">
+			<div class="col-md-12 adminBlog hvr-float hvr-underline-from-left">
+				<span class="roundedBorder glyphicon glyphicon-pencil" ></span>Create Blog Post
+			</div></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row animation">
+			<a href="adminProject">
+			<div class="col-md-12 adminBlog hvr-float hvr-underline-from-left">
+				<span class="roundedBorder glyphicon glyphicon-ok" ></span>Approve Pending Projects
+			</div></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row animation">
+			<a href="adminPromote">
+			<div class="col-md-12 adminBlog hvr-float hvr-underline-from-left">
+				<span class="roundedBorder glyphicon glyphicon-thumbs-up" ></span>Promote User to Admin
+			</div></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row animation">
+			<a href="adminRoster">
+			<div class="col-md-12 adminBlog hvr-float hvr-underline-from-left">
+				<span class="roundedBorder glyphicon glyphicon-list-alt" ></span>View Current Users
+			</div></a>
+		</div>
+	</div>
+	
+	
+{% endblock %}

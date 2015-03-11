@@ -1,0 +1,44 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										<a href="adminpanel">Back to Admin Panel</a>
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h3>User Roster:</h3>
+					<table class="table table-striped">
+						<th>#</th>
+						<th>GitHub Name</th>
+						<th>Last Login Date</th>
+						<th>Account Type</th>
+
+						{% for row in roster: %}
+						<tr>
+							<td>{% print loop.index %}</td>
+							<td>{% print row[0] %}</td>
+							<td>{% print row[1] %}</td>
+							<td>{% print row[2] %}</td>
+						</tr>
+						{% endfor %}
+					</table>
+			</div>		
+		</div>
+	</div>
+	
+	
+	
+{% endblock %}

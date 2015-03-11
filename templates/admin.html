@@ -1,0 +1,189 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+{% with msgs = get_flashed_messages() %}
+        {% if msgs %}
+          {%- for msg in msgs %}
+			{% if msg == 'No record with this GitHub name exists. Please try again.' %}
+				<div class="alert alert-danger text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+			{% if msg == 'You successfully submitted a blog entry!' %}
+				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+			{% if 'promoted' in msg %}
+				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+          {% endfor -%}
+        {% endif %}
+      {% endwith %}
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										Admin Panel <a href="adminpanel">Here</a>
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>Add a blog post to Home page:</h3>
+				<form action="/blogentry" method="post" name="blogpostentry"accept-charset="utf-8">
+                    <div class="modal-body" style="padding: 5px;">
+                          <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="blogtitle" placeholder="Blog post title" type="text" required autofocus />
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Blog post entry" rows="6" name="blogpost" required></textarea>
+                                </div>
+                            </div>
+					
+                        </div>  
+                        <div class="panel-footer" style="margin-bottom:-14px; text-align: center;">
+                            <input type="submit" class="btn btn-success" value="Submit"/>
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                            <input type="reset" class="btn btn-danger" value="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        </div>
+					</form>
+			
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>Projects requiring approval:</h3>
+				{% for row in pending: %}
+				<div class="container">
+			<div class="row">
+				
+		<div class="col-md-11">
+		<div class="row panelshadow" style="background-color: #fff">
+		<div class="panel panel-default panelborder">
+		<!-- Default panel contents -->
+			<!--<div class="panelHeaderBlack ">{% print row[1] %}<small style="color: #dedede">  Company Name</small><hr style="margin: 0px; padding: 0px;"></div>-->
+				<table class="panelshadow">
+					<div class="col-md-2 projectPicture">
+						<div class="row">
+							
+							<div class="col-md-12" style="text-align: right;">
+								<img class="companylogo" align="left" src="../static/projecttest1.png" alt="project" />
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 projectDescription">
+						<div class="row">
+							<div class="col-md-12 projectDescription">
+							<p><span style="font-size: 120%; font-weight: bold; color: #4d67d8; ">{% print row[1] %}</span>
+							{% print row[2] %} 
+							
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][0] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][1] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][2] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][3] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][4] %}</span>
+							
+							</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12 projectComments">
+								<a class="showComment">View Dr. Clark's Comments</a>
+								<div class="hideNew" style="display: none;">
+									{% print row[3] %}
+								</div>
+							<div id="insert{%print row[0] %}"></div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<div class="row" style="text-align: right; padding-right: 3px;">
+							<small>Added: {% print row[6] %}</small>
+						</div>
+					</div>
+					
+				</table>
+		</div>
+		</div>
+		</div>
+		<div class="col-md-12">								
+					<form action="/addcomment" method="post" name="addcomment"accept-charset="utf-8">
+                    <div class="modal-body" style="padding: 5px;">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-8 col-sm-8" style="margin-right: -20px;">
+									<input type="hidden" id="comment" name="commentid" value="{% print row[0] %}" />
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Add your comment here..." rows="2" name="addedcomment" required></textarea>
+								</div>
+								<div class="col-lg-4 col-md-4 col-sm-4">
+								<input type="submit" class="btn btn-success" value="Approve"/>
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+								<input type="reset" class="btn btn-danger" value="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+								</div>
+                            </div>
+					
+                       </div>  
+                       
+					</form>							
+				</div>
+		
+				
+			</div>
+		</div>
+		<hr>
+		{% endfor %}
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>Add Admin:</h3>
+			Eligible users: 
+			{% for row in normUser: %}
+			<span class="label label-danger" style="font-size: 100%; color: #fff">{% print row[0] %}</span>			
+			{% endfor %}
+			</div>
+			
+			<div class="col-md-12">
+				<form action="/createAdmin" method="post" name="createAdminForm"accept-charset="utf-8">
+					<div class="modal-body" style="padding: 5px;">
+                          <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <input class="form-control" name="createAdmin" placeholder="GitHub name" type="text" required autofocus />
+                                </div>
+								<div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 10px;">
+								<div style="margin-left:-20px; text-align: left;">
+									<input type="submit" class="btn btn-success" value="Promote"/>
+								</div>
+								</div>
+                           </div>
+
+					</div>                       
+				</form>
+			</div>
+			
+		</div>
+	</div>	
+	
+	
+{% endblock %}

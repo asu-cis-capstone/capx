@@ -1,0 +1,165 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										Propose a Project
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>These are my guidelines for a suitable project:</h3>
+			<li>1. Projects involve software development.</li>
+			<li>2. Each project needs an outside client contact to provide feedback to you, and eventually to me as part of your grading.</li>
+			<li>3. Short timeframe, so you can't expect to do too much.  If a project can be broken down into "features", and these prioritized 
+			into "must haves" and "nice to haves", that's best.  It means you can do more, or less, as you get along in the semester and have a 
+			better idea of what can be done in time.
+			</li>
+			<li>4. There are six milestones before the final release (follow the link above) so you can't expect to do too little.  A static web page 
+			or Wordpress implementation is not going to be enough for you to get a good grade, unless you add something else to it (such as digital marketing and analytics, for example).
+			</li>
+			<li>5. Part of the project must be open-sourced, because we'll be using GitHub for collaboration. 
+			Anything that's a trade secret can be kept offline and closed, so this shouldn't be a problem.
+			</li>
+			<li>6. The project must be real work, even if not completed in the semester.  A prototype or beta version can be acceptable,
+			but a project without a client, or that isn't deliverable and testable, is not.</li>
+			</div>
+		</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>Propose a Project:</h3>
+				<form action="/proposeproject" method="post" name="propose"accept-charset="utf-8">
+                    <div class="modal-body" style="padding: 5px;">
+                          <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="firstname" placeholder="First name" type="text" required autofocus />
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="lastname" placeholder="Last name" type="text" required />
+                                </div>
+                            </div>
+							
+							<div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="email" placeholder="E-mail" type="text" required autofocus />
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="phone" placeholder="Phone # no symbols" type="text" required />
+                                </div>
+                            </div>
+							
+							
+							
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="company" placeholder="Company name" type="text" required />
+                                </div>
+                            </div>
+							<div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                    <input class="form-control" name="project" placeholder="Project name" type="text" required />
+									
+                                </div>
+                            </div>
+							
+							<div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+									<INPUT TYPE="checkbox" NAME="HTML" 
+									onClick="return KeepCount()"> HTML
+
+									<INPUT TYPE="checkbox" NAME="CSS" 
+									onClick="return KeepCount()"> CSS
+
+									<INPUT TYPE="checkbox" NAME="Java" 
+									onClick="return KeepCount()"> Java
+
+									<INPUT TYPE="checkbox" NAME="Python" 
+									onClick="return KeepCount()"> Python
+
+									<INPUT TYPE="checkbox" NAME="CSharp" 
+									onClick="return KeepCount()"> C#
+									
+									<INPUT TYPE="checkbox" NAME="Django" 
+									onClick="return KeepCount()"> Django
+									
+									<INPUT TYPE="checkbox" NAME="iOSMobile" 
+									onClick="return KeepCount()"> iOS Mobile
+									
+									<INPUT TYPE="checkbox" NAME="Android" 
+									onClick="return KeepCount()"> Android
+							   </div>
+                            </div>
+                           
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <textarea style="resize:vertical;" class="form-control" placeholder="Brief Project description" rows="6" name="comment" required></textarea>
+                                </div>
+                            </div>
+							
+							
+							
+							
+                        </div>  
+                        <div class="panel-footer" style="margin-bottom:-14px; text-align: center;">
+                            <input type="submit" class="btn btn-success" value="Send"/>
+                                <!--<span class="glyphicon glyphicon-ok"></span>-->
+                            <input type="reset" class="btn btn-danger" value="Clear" />
+                                <!--<span class="glyphicon glyphicon-remove"></span>-->
+                        </div>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+	<SCRIPT LANGUAGE="javascript">
+
+	function KeepCount() {
+
+	var NewCount = 0
+
+	if (document.propose.HTML.checked)
+	{NewCount = NewCount + 1}
+
+	if (document.propose.CSS.checked)
+	{NewCount = NewCount + 1}
+
+	if (document.propose.Java.checked)
+	{NewCount = NewCount + 1}
+
+	if (document.propose.Python.checked)
+	{NewCount = NewCount + 1}
+
+	if (document.propose.CSharp.checked)
+	{NewCount = NewCount + 1}
+	
+	if (document.propose.Django.checked)
+	{NewCount = NewCount + 1}
+	
+	if (document.propose.iOSMobile.checked)
+	{NewCount = NewCount + 1}
+
+	if (document.propose.Android.checked)
+	{NewCount = NewCount + 1}
+	
+	if (NewCount == 6)
+	{
+	alert('Only pick the 5 most important ones.')
+	document.propose; return false;
+	}
+	} 
+	</SCRIPT>
+
+{% endblock %}

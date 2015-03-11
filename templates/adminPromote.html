@@ -1,0 +1,67 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+{% with msgs = get_flashed_messages() %}
+        {% if msgs %}
+          {%- for msg in msgs %}
+			{% if msg == 'No record with this GitHub name exists. Please try again.' %}
+				<div class="alert alert-danger text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+			{% if 'promoted' in msg %}
+				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}
+          {% endfor -%}
+        {% endif %}
+      {% endwith %}
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										<a href="adminpanel">Back to Admin Panel</a>
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h3>Add Admin:</h3>
+			Eligible users: 
+			{% for row in normUser: %}
+			<span class="label label-danger" style="font-size: 100%; color: #fff">{% print row[0] %}</span>			
+			{% endfor %}
+			</div>
+			
+			<div class="col-md-12">
+				<form action="/createAdmin" method="post" name="createAdminForm"accept-charset="utf-8">
+					<div class="modal-body" style="padding: 5px;">
+                          <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 10px;">
+                                    <input class="form-control" name="createAdmin" placeholder="GitHub name" type="text" required autofocus />
+                                </div>
+								<div class="col-lg-6 col-md-6 col-sm-6" style="margin-top: 10px;">
+								<div style="margin-left:-20px; text-align: left;">
+									<input type="submit" class="btn btn-success" value="Promote"/>
+								</div>
+								</div>
+                           </div>
+
+					</div>                       
+				</form>
+			</div>
+			
+		</div>
+	</div>	
+	
+	
+	
+{% endblock %}

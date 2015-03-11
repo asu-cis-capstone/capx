@@ -29,12 +29,12 @@ navbar-brand.a{
 
 .active1{
 	background-image: none !important;
-	color: #b8d073 !important;
-	border-top: 2px solid #b8d073;
+	color: #84b8ff !important;
+	border-top: 2px solid #84b8ff;
 }
 .active1 a{
 	background-image: none !important;
-	color: #b8d073 !important;
+	color: #84b8ff !important;
 }
 
 .msgtext{
@@ -50,7 +50,7 @@ navbar-brand.a{
 }
 
 .move-right{
-	margin-left: 100px !important;
+	margin-left: 5px !important;
 }
 
 .move-right2{
@@ -65,9 +65,9 @@ navbar-brand.a{
   text-shadow: none !important;
 }
 
-.navitems a:hover {	color: #b8d073 !important; }
+.navitems a:hover {	color: #84b8ff !important; }
 .navitems a:visited {	color:	#dedede; }
-.navitems a:active { color: #b8d073 !important; }
+.navitems a:active { color: #84b8ff !important; }
 
 
 
@@ -88,14 +88,13 @@ testing:  4c4c4c  /  272727
 	box-shadow: 0px 0px 5px 0px rgba(0,0,0,1);
 	border-bottom: 1px solid #000;
 	z-index: 2;
-
 }
 
 
 
 body{
 	background-color: #f8f8f8;
-	font-family:	'Droid Sans', 'Open Sans';
+	/* font-family:	'Droid Sans', 'Open Sans'; */
 }
 
 .header6{
@@ -113,15 +112,16 @@ green text-color: #b8d073
 blue: #84b8ff   or 86c1ff
  */
 .customColor{
-	color: #b8d073 !important;
+	color: #84b8ff !important;
+	margin-left: 0px;
 }
  
 .btnCustom{
-	width: 220px;
+	width: 190px;
 	font-size: 100%;
 	border-radius: 0px;
 	line-height: 31px;
-	color: #b8d073 !important;
+	color: #84b8ff !important;
 	text-shadow: none;
 	border: none !important;
 	background-image: -webkit-linear-gradient(top, #3f3f3f 0%, #030303 100%) !important;
@@ -135,16 +135,30 @@ blue: #84b8ff   or 86c1ff
 
 .btnCustom:hover{
 	background-image: none !important;
-	background-color: #b8d073;
+	background-color: #84b8ff;
 	color: #2a2a2a !important;
 }
+
+.btnCustom:active{
+	background-image: none !important;
+	background-color: #84b8ff;
+	color: #2a2a2a !important;
+}
+
+ 
+ .BlogHeader{
+	background-image: -webkit-linear-gradient(top, #84b8ff 0%, #4994f1 100%) !important;
+	background-image:      -o-linear-gradient(top, #84b8ff 0%, #4994f1 100%)!important;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#84b8ff), to(#4994f1))!important;
+	background-image:         linear-gradient(to bottom, #84b8ff 0%, #4994f1 100%)!important;
+ }
  
 .panelHeaderBlack{
 	background-image: -webkit-linear-gradient(top, #3f3f3f 0%, #030303 100%) !important;
 	background-image:      -o-linear-gradient(top, #3f3f3f 0%, #030303 100%)!important;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#3f3f3f), to(#030303))!important;
 	background-image:         linear-gradient(to bottom, #3f3f3f 0%, #030303 100%)!important;
-	color: #b8d073 !important;
+	color: #84b8ff !important;
 	font-size: 120%;
 	border-radius: 0px;
 	padding-bottom: 4px;
@@ -154,6 +168,8 @@ blue: #84b8ff   or 86c1ff
 .projectUpvote{
 	background-color: #fff;
 	padding-bottom: 10px;
+	padding-right: 0px;
+	margin-right: 0px;
 }
 
 .projectDescription{
@@ -167,6 +183,7 @@ blue: #84b8ff   or 86c1ff
 
 .projectPicture{
 	background-color: #fff;
+	
 
 }
 
@@ -181,7 +198,7 @@ hr{
 -webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 -moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
-	margin-top: 10px;
+	margin-top: 5px;
 	padding: 0px;
 }
 
@@ -197,9 +214,6 @@ box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
 
 .hideC a:hover { text-decoration: none !important; }
 
-.addPadding{
-	padding-bottom: 200px;
-}
 
 .rating{
 	font-size: 115%;
@@ -245,18 +259,56 @@ label {
 
 	}
 
+.companylogo{
+	width: 150px; 
+	height: 75; 
+}
 
+.extrainfo{
+	text-align: right;
+	padding-right: 0px;
+	margin-right: 0px;
+}
 
+.hideNew{
+	background-color: #f8f8f8;
+	margin-bottom: 3px;
+	padding: 2px;
+}
 
+.copyright{
+	font-size: 90%;
+	font-style: italic;
+	text-align:center;
+}
 
+.adminBlog{
+	margin-top: 15px;
+	font-size: 250%;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	padding-left: 15px;
+	-webkit-transition: .1s;
+	-moz-transition: .1s;
+	-o-transition: .1s;
+	-ms-transition: .1s;
+	transition: background-color .1s , border-color .1s, color .1s, background-image .1s;
+}
 
+.roundedBorder{
+	border: 2px solid #2a2a2a;
+	padding: 15px;
+	color: #004c9a !important;
+	border-radius: 50%;
+	margin-right: 15px;
+}
 
+.animation a:visited{
+	color: #2a2a2a !important;
+}
 
-
-
-
-
-
-
+.animation a:hover{
+	color: #004c9a !important;
+}
 
 
