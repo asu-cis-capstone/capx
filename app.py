@@ -5,11 +5,6 @@ import datetime
 
 
 #setup the database connection and create 3 cursor objects to execute SQL statements
-#conn = psycopg2.connect(database="da0c336s7ha473", user="jzmjrrvrslorle", password="uzRtSKdmsmv2KxDpc63eGr7VYd", host="ec2-107-22-234-129.compute-1.amazonaws.com", port="5432")
-#cur = conn.cursor()
-#cur2 = conn.cursor()
-#cur3 = conn.cursor()
-
 def connect_db():
 	g.conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="MODIFY")
 	g.cur = g.conn.cursor()
