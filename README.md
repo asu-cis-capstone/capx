@@ -78,4 +78,4 @@ Release Notes
 
 **Release 0.4**
 
--Link to Release 0.4 video walkthrough: https://www.youtube.com/watch?v=aK_Lo4ghw9M&feature=youtu.be
+- Link to Release 0.4 video walkthrough: https://www.youtube.com/watch?v=aK_Lo4ghw9M&feature=youtu.be
