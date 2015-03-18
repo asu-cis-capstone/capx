@@ -21,3 +21,5 @@ wsgiref==0.1.2
 Flask-SQLAlchemy==2.0
 SQLAlchemy==0.9.8
 GitHub-Flask==2.0.1
+Markdown==2.6.1
+Flask-Session==0.1.1

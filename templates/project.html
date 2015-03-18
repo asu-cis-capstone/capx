@@ -22,7 +22,17 @@
 				<div class="alert alert-info text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
 				  {{ msg }}
 				</div>
-			{% endif %}			
+			{% endif %}		
+			{% if msg == 'You already expressed interest to work on this project!' %}
+				<div class="alert alert-danger text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}	
+			{% if msg == 'You successfully expressed interest to work on this project!' %}
+				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
+				  {{ msg }}
+				</div>
+			{% endif %}	
           {% endfor -%}
         {% endif %}
       {% endwith %}
@@ -118,6 +128,21 @@
 					<div class="col-md-2">
 						<div class="row" style="text-align: right; padding-right: 3px;">
 							<small>Added: {% print row[6] %}</small>
+							{% if logincheck == '_loggedin' %}
+							<form id="interestForm" action="/expressInterest" method="post">
+								<input type="hidden" id="expressInterest" name="expressInterest" value="{% print row[0] %}" />	
+								<input type="submit" id="express" name="express" class="btn btn-primary btn-xs" value="Express Interest" style="width: 100px;" />
+				
+							</form>	
+							</br>
+								<a href="https://github.com/{% print row[13][0] %}"><span class="label" style="color: #3f3f3f">{% print row[13][0] %}</span></a>
+								<a href="https://github.com/{% print row[13][1] %}"><span class="label" style="color: #3f3f3f">{% print row[13][1] %}</span></a>
+								<a href="https://github.com/{% print row[13][2] %}"><span class="label" style="color: #3f3f3f">{% print row[13][2] %}</span></a>
+								<a href="https://github.com/{% print row[13][3] %}"><span class="label" style="color: #3f3f3f">{% print row[13][3] %}</span></a>
+								<a href="https://github.com/{% print row[13][4] %}"><span class="label" style="color: #3f3f3f">{% print row[13][4] %}</span></a>
+								<a href="https://github.com/{% print row[13][5] %}"><span class="label" style="color: #3f3f3f">{% print row[13][5] %}</span></a>
+								<a href="https://github.com/{% print row[13][6] %}"><span class="label" style="color: #3f3f3f">{% print row[13][6] %}</span></a>
+							{% endif %}
 						</div>
 					</div>
 					
@@ -125,10 +150,23 @@
 		</div>
 		</div>
 		</div>
+				<!-- {% if logincheck == '_loggedin' %}
+						<div class="col-lg-8 col-md-8 col-sm-8"></div>
+						
+						<div class="col-lg-4 col-md-4 col-sm-4 peopleInterested">
+							People Interested in this project: </br>
+							{% print row[13][0] %}
+							{% print row[13][1] %}
+							{% print row[13][2] %}
+							{% print row[13][3] %}
+							{% print row[13][4] %}
+						</div>	
+						</br>
+				{% endif %} -->
 			{% endfor %}
-				</div>
 			</div>
-	</div>
+		</div>
+</div>
 		
 	<script>
 		$(function() {

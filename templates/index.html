@@ -7,7 +7,7 @@
 							<div class="row">
 							
 								<p class="header6">
-										Welcome to CIS440.com
+										Welcome to CIS440.com										
 								</p>
 							</div>
 					</div>
@@ -32,7 +32,7 @@
 							</div>
 						</div>
 						<div class="panel-body">
-							<p>{% print row[2] %}</p>
+							<p>{{ blogBody[loop.index - 1] }}</p>
 						</div>
 					</div>
 				{% endfor %}

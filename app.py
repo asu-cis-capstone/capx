@@ -1,10 +1,9 @@
-import psycopg2, requests, json
+import psycopg2, requests, json, markdown
 from flask.ext.github import GitHub
 from flask import Flask, render_template, request, redirect, url_for, flash, session, g
 import datetime
+from flask import Markup
 
-
-#setup the database connection and create 3 cursor objects to execute SQL statements
 def connect_db():
 	g.conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="MODIFY")
 	g.cur = g.conn.cursor()
@@ -45,7 +44,7 @@ def index():
 	connect_db()
 	# Sets the current users GitHub name
 	if 'userName' in session:
-		print('Do nothing')
+		print('User already in session...')
 	else:
 		session['userName'] = ''
 		session['adminCheck'] = ''
@@ -64,10 +63,20 @@ def index():
 	# pull all blog posts, show the most recent
 	g.cur.execute("select * from Blog order by datecreated desc, timecreated desc;")
 	blogs = g.cur.fetchall()
-	
+
+	newlist = list('test')
+	for counter in range(0, len(blogs)):
+		newlist[counter] = blogs[counter][2]
+
+
+	for counter in range (0, len(blogs)):
+		newlist[counter] = Markup(markdown.markdown(newlist[counter]))
+
+	blogBody = newlist
+
 	close_db()
 
-	return render_template("index.html", homeStatus=homeStatus, logincheck=logincheck, admin=session['adminCheck'], userName=session['userName'], blogs=blogs)
+	return render_template("index.html", homeStatus=homeStatus, logincheck=logincheck, admin=session['adminCheck'], userName=session['userName'], blogs=blogs, blogBody=blogBody)
 
 # Projects route
 @app.route('/projects', methods = ['GET', 'POST'])
@@ -325,6 +334,39 @@ def proposeproject():
 	close_db()
 	return redirect(url_for('index', _external=True, _scheme='https'))
 
+# Express interest in project route
+@app.route('/expressInterest', methods = ['POST', 'GET'])
+def expressInterest():
+	if session['blnLoggedIn'] == '':
+		return render_template("pleaselogin.html")
+	
+	projectId = request.form.get('expressInterest', None)
+	projectId = int(projectId)
+	print (projectId)
+	connect_db()	
+
+	g.cur.execute("SELECT interested from PROJECT2 WHERE id = %(id)s;", {'id': projectId})
+	result = g.cur.fetchall()
+	
+	newInterest = [session['userName']]
+	print(result[0][0])
+	
+	if result[0][0] is None:
+		print("Nobody has expressed interest yet, first record is being added...")
+		newResult = newInterest
+	else:
+		if session['userName'] in result[0][0]:
+			flash('You already expressed interest to work on this project!')
+			return redirect('/projects')
+		else: 
+			flash('You successfully expressed interest to work on this project!')
+			newResult = result[0][0] + newInterest
+
+	g.cur.execute("UPDATE project2 set interested = %s WHERE id = %s;", (newResult, projectId))
+	g.conn.commit()
+	close_db()
+	return redirect('/projects')
+	
 # Admin Feature: Blog Main Page
 @app.route('/adminBlog')
 def adminBlog():
@@ -458,6 +500,7 @@ def adminRoster():
 	
 	return render_template("adminRoster.html", adminStatus=adminStatus, logincheck=logincheck, userName=session['userName'], admin=session['adminCheck'], roster=roster)
 	
+
 	
 	
 if __name__ == '__main__':
