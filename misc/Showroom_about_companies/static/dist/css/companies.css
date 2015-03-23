@@ -1,0 +1,24 @@
+.cover-card {
+	border: 2px solid white;
+	background: silver;
+	padding: 0px;
+	margin: 0px;
+	height:200px;
+}
+.cover-card > p {
+	text-align: center;
+	background-color: rgba(6,6,6,0.0);
+	color: rgba(6,6,6,0.0);
+	width: 100%;
+	height: 100%;
+	font-weight: bold;
+	font-size: 20px;
+}
+.cover-card:hover > p {
+	background-color: rgba(6,6,6,0.3);
+	color: white;
+	text-shadow: 3px 3px 10px #000;
+}
+.row h2  {
+  color: #2098d1;
+}

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CAPx - CIS 440</title>
+	
+	 <!-- Meta tag -->
+	<meta name="robots" content="noindex, nofollow" />	
+    <meta charset="utf-8" />
+
+    <!-- Link tag for CSS -->
+	
+	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap.min.css" />
+	<link type="text/css" rel="stylesheet" href="../static/dist/css/bootstrap-theme.css" />
+	<link type="text/css" rel="stylesheet" href="../static/dist/css/css5.css" />
+	<link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Sans" />
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+	
+	<!-- jquery -->
+	<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+	
+	<!-- JavaScript Tags -->
+	<script type="text/javascript" src="../static/dist/js/bootstrap.min.js"></script>
+
+  </head>
+  
+  
+  
+  <body>
+    <div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="section1">
+					<div class="container">
+							<div class="row">
+								<nav class="navbar navbar-default">
+									  <div class="container-fluid">
+										<!-- Brand and toggle get grouped for better mobile display -->
+										<div class="navbar-header">
+										  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+											<span class="sr-only">Toggle navigation</span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+											<span class="icon-bar"></span>
+										  </button>
+										  <a class="navbar-brand" href="#"><img style="max-height: 45px; margin-top: -13px; padding: none;" src="../static/logo3.png" alt="logo1"/></a>
+										</div>
+										<!-- Collect the nav links, forms, and other content for toggling -->
+										<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+										  <ul class="nav navbar-nav move-right">
+											<li class="navbarlist navitems"><a href="index.html"><!--<span class="glyphicon glyphicon-home msgtext" aria-hidden="true"></span>-->Home</a></li>
+																				
+											<li class="dropdown">
+											<a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects<strong class="caret"></strong></a>
+											<ul class="dropdown-menu">
+											<li>
+											<a href="projects.html">Projects</a>
+											</li>
+											</li>
+											<li>
+											<a class="btn btn-primary btn-lg" data-toggle="modal" data-target="#contact" data-original-title>Submit Project</a>
+											
+											</li>
+											</ul>
+											<li class="navbarlist navitems"><a href="showroom.html">Showroom</a></li>
+										
+											<li class="navbarlist navitems"><a href="#">About Us</a></li>
+										  </ul>
+										  
+										  <ul class="nav navbar-nav navbar-right ">
+											<li class="dropdown">
+											  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Log In <span class="caret"></span></a>
+											  <ul class="dropdown-menu expandLogin" role="menu">
+
+												<form id="joinform" action="/login.html" method="post">
+														<p>
+															<!-- Username -->
+															<label for="username">Username:</label>
+															<input type="text" id="username" name="username"
+															required autofocus
+															pattern="[a-zA-Z0-9-_!$]{4,15}"
+															title="Username: 4-15 chars, u/l case letters, 0-9, - _ ! or $ only!"															
+															/>
+															
+															<!-- Password -->
+															<label for="password">Password:</label>
+															<input type="password" id="password" name="password" 
+															required
+															pattern="[a-zA-Z0-9-_!$]{5,15}"
+															title="Password: 5-15 chars, u/l case letters, 0-9, - _ ! or $ only. No spaces."															
+															/>
+															<input type="submit" value="Login" />
+														</p>
+													</form>	
+												<li><a href="#" style="text-align: right";>Don't have an account? Register Here</a></li>
+												<li class="divider"></li>
+
+											  </ul>
+											</li>
+										  </ul>
+										</div><!-- /.navbar-collapse -->
+
+									  </div><!-- /.container-fluid -->
+									</nav>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+		
+	{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										About CIS 440
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="section-heading">Course Description and Objectives</h1>
+                    
+                    
+					<p class="section-paragraph"> CIS 440, aka “Systems Design and Electronic Commerce”, is the capstone course for the W. P. Carey School’s 
+					undergraduate Information Systems program.  Over the course of fifteen weeks (or in the summer semester, six very compressed weeks), 
+					our senior students work together in self-organizing teams to complete IT/IS projects that deliver tangible business value to real 
+					businesses.  They apply the whole range of skills they have acquired through earlier Information Systems coursework, internships, 
+					and work experience.
+					</p>
+					<p>
+					CIS 440 is a joy to teach, because the capstone projects quickly take center stage and much of the learning is accomplished laterally, 
+					as insights and discoveries are shared within and across teams.  Nonetheless, I do lecture a little bit!  Some of the important topics we 
+					cover in the class, and that students can immediately put to practical use, include:
+					</p>
+					<ul>
+					<li>the Agile approach to project management, and the Scrum framework in particular</li>
+					<li>project scoping and requirements discovery</li>
+					<li>metrics and “information radiators” for empirical project management</li>
+					<li>modern software development practices including test-driven-development (TDD)</li>
+					<li>Dev/Ops, continuous integration, automated testing, and continuous delivery</li>
+					</ul>
+					<p>
+					One of the main objectives of the course is that students will improve their communication and organizing skills as they learn 
+					from (brutal) experience how to work as a self-organizing team and engage with a real client to complete a project with limited time 
+					and resources.  They invariably experience miscommunications, unpredictably changing requirements, and a host of other challenges, 
+					and learn to overcome them.
+					</p>
+					<h1 class="section-heading">Contact us</h1>
+				</div>
+				
+				
+				<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-6">
+            <div class="well well-sm">
+                <div class="row">
+                    <div class="col-sm-6 col-md-4">
+                        <img src="../static/clark.jpg" alt="Joseph Clark" class="img-rounded img-responsive" />
+                    </div>
+                    <div class="col-sm-6 col-md-8">
+                        <h4>
+                            Dr. Joseph Clark</h4>
+                        
+                        <p>
+                            <i class="glyphicon glyphicon-envelope"></i>joeclark.phd@gmail.com
+                            <br />
+                            <i class="glyphicon glyphicon-globe"></i>(602) 000-0000
+                          
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+				
+				
+{% endblock %}
+
+	<script>
+		$(function() {
+			$('.showComment').click(function(e) {
+				$(event.target).next().fadeToggle()
+			});
+		});
+	</script>	
+  </body>
+</html>
