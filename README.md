@@ -76,3 +76,16 @@ Release Notes
 **Release 0.4**
 
 - Link to Release 0.4 video walkthrough: https://www.youtube.com/watch?v=aK_Lo4ghw9M
+
+**Release 0.5**
+
+- Added blog edit feature
+- Added blog delete feature
+- template for showroom added
+- "Companies we have worked with" added to index
+- Added "Express Interest" button
+- more beta testing
+- cleaned up contact/about page
+- added admin feature: set project inactive
+- added admin feature: add tags to project
+- added admin feature: able to change description before submission
