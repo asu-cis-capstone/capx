@@ -81,11 +81,11 @@ Release Notes
 
 - Added blog edit feature
 - Added blog delete feature
-- template for showroom added
+- Template for showroom added
 - "Companies we have worked with" added to index
 - Added "Express Interest" button
-- more beta testing
-- cleaned up contact/about page
-- added admin feature: set project inactive
-- added admin feature: add tags to project
-- added admin feature: able to change description before submission
+- More beta testing
+- Cleaned up contact/about page
+- Added admin feature: set project inactive
+- Added admin feature: add tags to project
+- Added admin feature: able to change description before submission
