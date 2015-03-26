@@ -7,7 +7,7 @@ from werkzeug import secure_filename
 
 
 def connect_db():
-	g.conn = psycopg2.connect(database="da0c336s7ha473", user="jzmjrrvrslorle", password="uzRtSKdmsmv2KxDpc63eGr7VYd", host="ec2-107-22-234-129.compute-1.amazonaws.com", port="5432")
+	g.conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="5432")
 	g.cur = g.conn.cursor()
 	
 def close_db():
@@ -17,9 +17,9 @@ def close_db():
 	
 #setup for GitHub login using Client ID and Client Secret
 app = Flask(__name__)
-app.config['GITHUB_CLIENT_ID'] = '56548f37239e29267dcd'
-app.config['GITHUB_CLIENT_SECRET'] = '87b27e13a98d91ef066512496524e073fd78bdf3'
-app.secret_key = 'AAA0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
+app.config['GITHUB_CLIENT_ID'] = 'MODIFY'
+app.config['GITHUB_CLIENT_SECRET'] = 'MODIFY'
+app.secret_key = 'MODIFY'
 
 Markdown(app)
 github = GitHub(app)
