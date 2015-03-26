@@ -3,7 +3,7 @@
 {% with msgs = get_flashed_messages() %}
         {% if msgs %}
           {%- for msg in msgs %}
-			{% if msg == 'You successfully approved a project!' %}
+			{% if msg == 'Successfully set project inactive!' %}
 				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
 				  {{ msg }}
 				</div>
@@ -29,10 +29,10 @@
 	<div class="container">
 		<div class="row">
 		<div class="col-md-12">
-			<h3>Projects requiring approval:</h3>
-				{% for row in pending: %}
-				<div class="container">
-			<div class="row">
+			<h3>List of Active Projects:</h3>
+				{% for row in inactiveProjects: %}
+		<div class="container">
+		<div class="row">
 				
 		<div class="col-md-11">
 		<div class="row panelshadow" style="background-color: #fff">
@@ -87,42 +87,29 @@
 		</div>
 		</div>
 		</div>
-		<div class="col-md-12">								
-					<form action="/addcomment" method="post" name="addcomment"accept-charset="utf-8">
+		<div class="col-md-1">								
+					<form action="/inactivateProject" method="post" name="inactivateProject"accept-charset="utf-8">
                     <div class="modal-body" style="padding: 5px;">
                             <div class="row">
-                                <div class="col-lg-5 col-md-5 col-sm-5" style="padding-left: 0px;">
-									<input type="hidden" id="comment" name="commentid" value="{% print row[0] %}" />
-                                    <textarea style="resize:vertical;" class="form-control" maxlength="300" placeholder="(Optional) Add your comment here... max 300 chars" value="No comment" rows="2" name="addedcomment" ></textarea>
+                                <div class="col-lg-8 col-md-8 col-sm-8" style="margin-right: -20px;">
+									<input type="hidden" id="projectId" name="projectId" value="{% print row[0] %}" />                               
 								</div>
-								<div class="col-lg-6 col-md-6 col-sm-6" style="padding-left: 0px;">
-                                    <textarea style="resize:vertical;" class="form-control" rows="2" placeholder="(Optional) Change description here... max 300 chars"
-									maxlength="300" name="addeddescription" value="{% print row[2] %}" ></textarea>
-								</div>
-								
-							</div>
-							</div>
-							<div class="row">
-								<div class="col-lg-6 col-md-6 col-sm-6"><span style="font-weight: bold;">Add Tags here - Format:   HTML,CSS,Python,etc</span>
-								<textarea style="resize:vertical;" class="form-control" placeholder="Format:   HTML,CSS,Python,etc" rows="1" name="addedtags" ></textarea>       
-								</div>
-								<div class="col-lg-4 col-md-4 col-sm-4" style="padding-top: 20px;">
-									<input type="submit" class="btn btn-success" value="Approve"/>                              
-									<input type="reset" class="btn btn-danger" value="Clear" />
+								<div class="col-lg-4 col-md-4 col-sm-4">
+								<input type="submit" class="btn btn-danger" value="Inactivate"/>
+
 								</div>
                             </div>
 					
-        </div>  
+                       </div>  
                        
 					</form>							
 				</div>
 		
 				
 			</div>
-		
+		</div>
 		<hr>
 		{% endfor %}
-		</div>
 	</div>
 	
 	

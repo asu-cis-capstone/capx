@@ -18,7 +18,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-			<h3>Here are some general guidelines a suitable project:</h3>
+			<h3>Here are some general guidelines for a suitable project:</h3>
 			<li>Projects must involve some type of software development</li>
 			<li>There should be a point of contact or contacts that will work closely with students to provide continuous feedback on the proposed project as it is being worked on, throughout the semester.</li>
 			<li>Reasonably sized - projects should not be so large in size that it prevents students from having a somewhat shippable product by the end of the semester.</li>
@@ -33,23 +33,24 @@
 		<div class="row">
 			<div class="col-md-12">
 			<h3>Propose a Project:</h3>
-				<form action="/proposeproject" method="post" name="propose"accept-charset="utf-8">
+			Fields marked with * are required
+				<form action="/proposeproject" method="post" name="propose" accept-charset="utf-8" enctype="multipart/form-data">
                     <div class="modal-body" style="padding: 5px;">
                           <div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="firstname" placeholder="First name" type="text" required autofocus />
+                                    <input class="form-control" name="firstname" pattern="[A-Za-z]{1,28}" placeholder="* First name" type="text" required autofocus />
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="lastname" placeholder="Last name" type="text" required />
+                                    <input class="form-control" name="lastname" pattern="[A-Za-z]{1,28}" placeholder="* Last name" type="text" required />
                                 </div>
                             </div>
 							
 							<div class="row">
                                 <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="email" placeholder="E-mail" type="text" required autofocus />
+                                    <input class="form-control" name="email" placeholder="* E-mail" type="text" required autofocus />
                                 </div>
                                 <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="phone" placeholder="Phone # no symbols" type="text" required />
+                                    <input class="form-control" name="phone" pattern="[0-9]{1,20}" placeholder="Phone # no symbols" type="text" />
                                 </div>
                             </div>
 							
@@ -57,17 +58,24 @@
 							
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="company" placeholder="Company name" type="text" required />
+                                    <input class="form-control" name="company" pattern="[A-Za-z0-9 ]{1,49}" placeholder="* Company name" type="text" required />
                                 </div>
                             </div>
+							
 							<div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="project" placeholder="Project name" type="text" required />
+                                   <input class="form-control" name="project" pattern="[A-Za-z0-9 ]{1,99}" placeholder="* Project name" type="text" required />
 									
                                 </div>
                             </div>
 							
 							<div class="row">
+                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
+                                     <!--Company Logo - Allowed extensions .png, .jpeg, .jpg, .gif <input type="file" name="file">-->
+                                </div>
+                            </div>
+							
+							<!-- <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
 									<INPUT TYPE="checkbox" NAME="HTML" 
 									onClick="return KeepCount()"> HTML
@@ -93,11 +101,11 @@
 									<INPUT TYPE="checkbox" NAME="Android" 
 									onClick="return KeepCount()"> Android
 							   </div>
-                            </div>
+                            </div> -->
                            
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <textarea style="resize:vertical;" class="form-control" placeholder="Brief Project description" rows="6" name="comment" required></textarea>
+                                    <textarea maxlength="300" style="resize:vertical;" class="form-control" placeholder="* Brief Project description. Max 300 characters..." rows="6" name="comment" required></textarea>
                                 </div>
                             </div>
 							

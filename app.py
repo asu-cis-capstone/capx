@@ -1,11 +1,13 @@
-import psycopg2, requests, json, markdown
+import psycopg2, requests, json, markdown, os
 from flask.ext.github import GitHub
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_from_directory
 import datetime
-from flask import Markup
+from flaskext.markdown import Markdown
+from werkzeug import secure_filename
+
 
 def connect_db():
-	g.conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="MODIFY")
+	g.conn = psycopg2.connect(database="da0c336s7ha473", user="jzmjrrvrslorle", password="uzRtSKdmsmv2KxDpc63eGr7VYd", host="ec2-107-22-234-129.compute-1.amazonaws.com", port="5432")
 	g.cur = g.conn.cursor()
 	
 def close_db():
@@ -15,11 +17,21 @@ def close_db():
 	
 #setup for GitHub login using Client ID and Client Secret
 app = Flask(__name__)
-app.config['GITHUB_CLIENT_ID'] = 'MODIFY'
-app.config['GITHUB_CLIENT_SECRET'] = 'MODIFY'
-app.secret_key = 'MODIFY'
+app.config['GITHUB_CLIENT_ID'] = '56548f37239e29267dcd'
+app.config['GITHUB_CLIENT_SECRET'] = '87b27e13a98d91ef066512496524e073fd78bdf3'
+app.secret_key = 'AAA0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
+Markdown(app)
 github = GitHub(app)
+
+app.config['UPLOAD_FOLDER'] = 'static/images'
+app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpeg', 'jpg', 'gif'])
+
+def allowed_file(filename):
+	return '.' in filename and \
+		filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
+
+
 
 # Variables
 
@@ -61,22 +73,22 @@ def index():
 	
 
 	# pull all blog posts, show the most recent
-	g.cur.execute("select * from Blog order by datecreated desc, timecreated desc;")
+	g.cur.execute("select * from Blog where active = 'yes' order by datecreated desc, timecreated desc;")
 	blogs = g.cur.fetchall()
 
-	newlist = list('test')
-	for counter in range(0, len(blogs)):
-		newlist[counter] = blogs[counter][2]
+	# newlist = list('test')
+	# for counter in range(0, len(blogs)):
+		# newlist[counter] = blogs[counter][2]
 
 
-	for counter in range (0, len(blogs)):
-		newlist[counter] = Markup(markdown.markdown(newlist[counter]))
+	# for counter in range (0, len(blogs)):
+		# newlist[counter] = Markup(markdown.markdown(newlist[counter]))
 
-	blogBody = newlist
+	# blogBody = newlist
 
 	close_db()
 
-	return render_template("index.html", homeStatus=homeStatus, logincheck=logincheck, admin=session['adminCheck'], userName=session['userName'], blogs=blogs, blogBody=blogBody)
+	return render_template("index.html", homeStatus=homeStatus, logincheck=logincheck, admin=session['adminCheck'], userName=session['userName'], blogs=blogs)
 
 # Projects route
 @app.route('/projects', methods = ['GET', 'POST'])
@@ -276,6 +288,17 @@ def downvote():
 # Propose project route		
 @app.route('/proposeproject', methods = ['POST', 'GET'])
 def proposeproject():
+	# start by processing the uploaded image and storing the file extension (PNG, jpeg, jpg, gif)
+	# file = request.files['file']
+	# if file and allowed_file(file.filename):
+		# filename = secure_filename(file.filename)
+		# print(filename)
+
+		
+		#store the file extension type. ex. png, jpeg, jpg
+		# extension = filename.rsplit('.',1)[1]
+
+
 	firstName = request.form.get('firstname', None)
 	lastName = request.form.get('lastname', None)
 	email = request.form.get('email', None)
@@ -284,37 +307,6 @@ def proposeproject():
 	projectTitle = request.form.get('project', None)
 	description = request.form.get('comment', None)
 	
-	htmlbox = request.form.get('HTML', None)
-	cssbox = request.form.get('CSS', None)
-	javabox = request.form.get('Java', None)
-	pythonbox = request.form.get('Python', None)
-	csharpbox = request.form.get('CSharp', None)
-	djangobox = request.form.get('Django', None)
-	iosmobilebox = request.form.get('iOSMobile', None)
-	androidbox = request.form.get('Android', None)
-	
-	tags = ''
-	
-	if htmlbox == 'on':
-		tags = tags + "HTML,"
-	if cssbox == 'on':
-		tags = tags + "CSS,"
-	if javabox == 'on':
-		tags = tags + "Java,"
-	if pythonbox == 'on':
-		tags = tags + "Python,"
-	if csharpbox == 'on':
-		tags = tags + "C#,"
-	if djangobox == 'on':
-		tags = tags + "Django,"
-	if iosmobilebox == 'on':
-		tags = tags + "iOS Mobile,"
-	if androidbox == 'on':
-		tags = tags + "Android,"
-		
-	tags = tags[:-1]
-	tags = "{" + tags + "}"
-
 	
 	currentDate = date = datetime.date.today()
 	semester = 'Spring2015'
@@ -329,9 +321,31 @@ def proposeproject():
 	print (description)
 	
 	connect_db()
-	g.cur.execute("INSERT INTO PROJECT2 (company, description, rating, tags, dateCreated, semester, contact, email, phone, active) VALUES (%(company)s, %(description)s, 0, %(tags)s, %(date)s, %(semester)s, %(contact)s, %(email)s, %(phone)s, 'no');", {'company': company, 'description': description, 'tags': tags, 'date': currentDate, 'semester': semester, 'contact': contact, 'email': email, 'phone': phone})
+	g.cur.execute("INSERT INTO PROJECT2 (company, description, rating, dateCreated, semester, contact, email, phone, active, title) VALUES (%(company)s, %(description)s, 0, %(date)s, %(semester)s, %(contact)s, %(email)s, %(phone)s, 'no', %(title)s);", {'company': company, 'description': description, 'date': currentDate, 'semester': semester, 'contact': contact, 'email': email, 'phone': phone, 'title':projectTitle})
 	g.conn.commit()
+	
+	#fetch the id of the newly created project, convert to string
+	g.cur.execute("SELECT id from PROJECT2 where description = %(description)s AND title = %(ptitle)s;", {'description': description, 'ptitle':projectTitle})
+	id = g.cur.fetchone()
+	
+	id = str(id)
+	id = id.rsplit(',',1)[0]
+	id = id.rsplit('(',1)[1]	
+	
 	close_db()
+	
+	
+	# file = request.files['file']
+	# if file and allowed_file(file.filename):
+		# filename = secure_filename(file.filename)
+		# print(filename)
+				
+		# #set custom file name and add extension
+		# filename = "project" + id + "." + extension
+		
+		# file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+		
+	
 	return redirect(url_for('index', _external=True, _scheme='https'))
 
 # Express interest in project route
@@ -379,6 +393,58 @@ def adminBlog():
 		logincheck = ''
 	return render_template("adminBlog.html", adminStatus=adminStatus, logincheck=logincheck, userName=session['userName'], admin=session['adminCheck'])	
 	
+# Admin Feature: Blog Edit Post
+@app.route('/adminBlogEdit')
+def adminBlogEdit():
+	if session['adminCheck'] != 'yes':
+		return redirect(url_for('index', _external=True, _scheme='https'))
+	adminStatus = 'active1'
+	if session['blnLoggedIn'] == "yes":
+		logincheck = '_loggedin'
+	else:
+		logincheck = ''
+	
+	connect_db()
+	g.cur.execute("SELECT * from blog where active = 'yes' order by datecreated desc;")
+	blogs = g.cur.fetchall()
+	close_db()
+		
+	return render_template("adminBlogEdit.html", adminStatus=adminStatus, logincheck=logincheck, userName=session['userName'], admin=session['adminCheck'], blogs=blogs)	
+	
+# Admin Feature: Blog edit methods
+@app.route('/blogedit', methods = ['POST', 'GET'])
+def blogedit():
+	if session['adminCheck'] != 'yes':
+		return redirect(url_for('index', _external=True, _scheme='https'))
+	
+	currentDate = datetime.date.today()
+	time = datetime.datetime.now()
+	hour = time.hour
+	minute = time.minute
+	timeCreated = str(hour) + ':' + str(minute)
+	
+	blogwriter = ''
+	blogwriter = session['userName']
+	
+	blogtitle = request.form.get('blogtitle', None)
+	blogpost = request.form.get('blogpost', None)
+	id = request.form.get('blogid', None)
+	
+	active = ''
+	if blogpost == '':
+		active = 'no'
+	else:
+		active = 'yes'
+	
+	connect_db()
+	g.cur.execute("UPDATE BLOG set blogwriter = %s, blogtitle = %s, blogentry = %s, dateCreated = %s, timeCreated = %s, editstatus = 'yes', active = %s WHERE id = %s;", (blogwriter, blogtitle, blogpost, currentDate, timeCreated, active, id))
+	g.conn.commit()
+	close_db()
+	
+	flash('You successfully edited a blog post!')
+	return redirect('/adminBlogEdit')
+	
+
 # Admin Feature: Blog entry
 @app.route('/blogentry', methods = ['POST', 'GET'])		
 def blogentry():	
@@ -428,11 +494,30 @@ def addcomment():
 	projectid = request.form.get('commentid', None)
 	comment = request.form.get('addedcomment', None)
 	comment = str(comment)
+	newdescription = request.form.get('addeddescription', None)
+	newdescription = str(newdescription)
+	
+	print(newdescription)
+	
+	editStatus = ''
+	if newdescription == '':
+		editStatus = 'no'
+	else:
+		editStatus = 'yes'
+		
+	print(editStatus)
+	
+	tags = request.form.get('addedtags', None)
+	tags = str(tags)
+	print (tags)
+	tags = "{" + tags + "}"
+	print(tags)
+	
 	print (comment)
 	print (projectid)
 	
 	connect_db()
-	g.cur.execute("UPDATE project2 SET active = 'yes', comments = %s WHERE id = %s;", (comment, projectid))
+	g.cur.execute("UPDATE project2 SET active = 'yes', comments = %s, tags = %s, description = %s, editstatus = %s WHERE id = %s;", (comment, tags, newdescription, editStatus, projectid))
 	g.conn.commit()
 	close_db()
 	flash('You successfully approved a project!')
@@ -494,15 +579,65 @@ def adminRoster():
 		logincheck = '_loggedin'
 	else:
 		logincheck = ''
-	g.cur.execute("SELECT githubname, lastlogindate, accountType from users;")
+	g.cur.execute("SELECT githubname, lastlogindate, accountType from users order by githubname")
 	roster = g.cur.fetchall()
 	close_db()	
 	
 	return render_template("adminRoster.html", adminStatus=adminStatus, logincheck=logincheck, userName=session['userName'], admin=session['adminCheck'], roster=roster)
 	
-
+# Admin Feature: Set Project Inactive
+@app.route('/adminInactive', methods = ['POST', 'GET'])
+def adminInactive():
+	if session['adminCheck'] != 'yes':
+		return redirect(url_for('index', _external=True, _scheme='https'))
+	connect_db()
+	adminStatus = 'active1'
+	if session['blnLoggedIn'] == "yes":
+		logincheck = '_loggedin'
+	else:
+		logincheck = ''
 	
+	g.cur.execute("SELECT * FROM PROJECT2 WHERE active = 'yes'")
+	inactiveProjects = g.cur.fetchall()
+	
+	close_db()
+	
+	return render_template("adminInactive.html", adminStatus=adminStatus, logincheck=logincheck, userName=session['userName'], admin=session['adminCheck'], inactiveProjects=inactiveProjects)
+
+# Admin Feature: Project Inactive
+@app.route('/inactivateProject', methods = ['POST', 'GET'])
+def inactivateProject():
+	if session['adminCheck'] != 'yes':
+		return redirect(url_for('index', _external=True, _scheme='https'))
+	
+	projectId = request.form.get('projectId', None)
+	projectId = int(projectId)
+	
+	print('Test')
+	connect_db()
+	g.cur.execute("UPDATE project2 SET active = 'no' WHERE id = %(id)s;", {'id':projectId})
+	g.conn.commit()
+	
+	close_db()
+	
+	flash('Successfully set project inactive!')
+	
+	return redirect('/adminInactive')
+
+
 	
 if __name__ == '__main__':
 	app.run(debug=True)
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	

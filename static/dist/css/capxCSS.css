@@ -177,8 +177,14 @@ blue: #84b8ff   or 86c1ff
 
 }
 
+.showComment{
+	font-size: 82%;
+}
+
 .projectComments{
-	background-color: #fff;
+	background-color: transparent;
+	  margin-top: -13px;
+	padding-top: 0px;
 }
 
 .projectPicture{
@@ -311,4 +317,19 @@ label {
 	color: #004c9a !important;
 }
 
+.peopleInterested{
+	background-color: #dadada;
+	font-weight: bold;
+	-webkit-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+	z-index: -21;
+}
+
+.customLink a{
+	color: #fff;
+}
+.customLink a:hover {	color: #3f3f3f !important; text-decoration: none; }
+.customLink a:visited {	color:	#fff; }
+.customLink a:active { color: #fff !important; }
 

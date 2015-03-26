@@ -3,7 +3,7 @@
 {% with msgs = get_flashed_messages() %}
         {% if msgs %}
           {%- for msg in msgs %}
-			{% if msg == 'You successfully submitted a blog entry!' %}
+			{% if msg == 'You successfully edited a blog post!' %}
 				<div class="alert alert-success text-center" style="font-weight: bold; padding: 0px; padding-top: 10px; margin: 0px; height: 45px; border-radius: 0px;">
 				  {{ msg }}
 				</div>
@@ -29,19 +29,25 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
-			<h3>Add a blog post to Home page:</h3>
-				<form action="/blogentry" method="post" name="blogpostentry"accept-charset="utf-8">
+			<h3>Blogs available for editing:</h3>
+			<h4>In order to remove a blog clear the title & body and press submit.</h4>
+				{% for row in blogs %}
+
+				
+				<form action="/blogedit" method="post" name="blogpostentry"accept-charset="utf-8">
                     <div class="modal-body" style="padding: 5px;">
                           <div class="row">
-                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">
-                                    <input class="form-control" name="blogtitle" placeholder="Blog post title" type="text" required autofocus />
+								<span class="label label-default">Blog posted by: {% print row[3] %} on {% print row[4] %}</span>
+                                <div class="col-lg-6 col-md-6 col-sm-6" style="padding-bottom: 10px;">		
+									<input type="hidden" id="blogid" name="blogid" value="{% print row[0] %}" />
+                                    <input class="form-control" name="blogtitle" value="{% print row[1] %}" type="text" autofocus />
                                 </div>
 
                             </div>
 
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
-                                    <textarea style="resize:vertical;" class="form-control" placeholder="Blog post entry" rows="6" name="blogpost" required></textarea>
+                                    <textarea style="resize:vertical;" class="form-control" rows="12" name="blogpost">{% print row[2] %}</textarea>
                                 </div>
                             </div>
 					
@@ -53,21 +59,16 @@
                                 <!--<span class="glyphicon glyphicon-remove"></span>-->
                         </div>
 					</form>
+				{% endfor %}
+				
+				
+				
 			
 			
 			</div>
 		</div>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<h3>Markdown Formatting Guidelines:</h3>
-				<p>Please follow <a href="http://daringfireball.net/projects/markdown/syntax">this</a> link for detailed markdown syntax rules.
-				
-				
-			</div>
-		</div>
-	</div>
+
 	
 	
 	

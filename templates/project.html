@@ -50,12 +50,27 @@
 				</div>
 			</div>
 	</div>
+	
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+			<h4>This is a list of all currently available projects for CIS 440.</br></br>Legend:</br></h4>
+			<input type="submit" id="express" name="express" class="btn btn-primary btn-xs" value="Express Interest" style="width: 100px;" /> This indicates that you are interested in working on this project. 
+			Your github name will be added to the project for others to see.</br>
+			<span class="label label-warning" style="color: #3f3f3f; font-size: 80%;">Python</span> These tags highlight the skills and technologies that will be used in the particular project.</br>
+			<span class="label label-danger" style="color: #fff">Modified</span> This tag indicates that the project description was modified by an admin.
+			
+			
+			</br></br>
+			</div>
+		</div>
+	</div>
 		
 <div class="container-fluid">
 	{% for row in rows: %}
 		<div class="container">
-			<div class="row">
-				<div class="col-md-1" style="padding-right: 0px; padding-left: 40px;">								
+		<div class="row">
+				<div class="col-md-1" style="padding-right: 0px; ">								
 						<form id="upvoteForm" action="/upvote" method="post">							
 							<input type="hidden" id="upvote" name="upvote" value="{% print row[0] %}" />
 							<input type="image" src="../static/upvote_active2.png" alt="Submit button" 
@@ -96,7 +111,7 @@
 								
 							</div> -->
 							<div class="col-md-12" style="text-align: right;">
-								<img class="companylogo" align="left" src="../static/projecttest1.png" alt="project" />
+								<img class="companylogo" height="75px" width="150px" align="left" src="../static/images/capx.jpeg" alt="project" />
 							</div>
 						</div>
 					</div>
@@ -106,18 +121,25 @@
 							<p><span style="font-size: 120%; font-weight: bold; color: #4d67d8; ">{% print row[1] %}</span>
 							{% print row[2] %} 
 							
+							{% if row[15] == 'yes' %}
+							<span class="label label-danger" style="color: #fff">Modified</span>
+							{% endif %}
 							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][0] %}</span>
 							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][1] %}</span>
 							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][2] %}</span>
 							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][3] %}</span>
 							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][4] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][5] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][6] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][7] %}</span>
+							<span class="label label-warning" style="color: #3f3f3f">{% print row[5][8] %}</span>
 							
 							</p>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-md-12 projectComments">
-								<a class="showComment">View Dr. Clark's Comments</a>
+								<a class="showComment">View Professor's Comments</a>
 								<div class="hideNew" style="display: none;">
 									{% print row[3] %}
 								</div>
@@ -150,19 +172,7 @@
 		</div>
 		</div>
 		</div>
-				<!-- {% if logincheck == '_loggedin' %}
-						<div class="col-lg-8 col-md-8 col-sm-8"></div>
-						
-						<div class="col-lg-4 col-md-4 col-sm-4 peopleInterested">
-							People Interested in this project: </br>
-							{% print row[13][0] %}
-							{% print row[13][1] %}
-							{% print row[13][2] %}
-							{% print row[13][3] %}
-							{% print row[13][4] %}
-						</div>	
-						</br>
-				{% endif %} -->
+				
 			{% endfor %}
 			</div>
 		</div>
