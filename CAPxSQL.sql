@@ -21,7 +21,7 @@ CREATE TABLE project2
   extension character varying(10),
   editstatus character varying(3),
   CONSTRAINT project2_pkey PRIMARY KEY (id)
-)
+);
 
   
 DROP TABLE IF EXISTS USERS CASCADE;
@@ -37,7 +37,7 @@ CREATE TABLE users
   placeholder2 character varying(50),
   placeholder3 smallint,
   CONSTRAINT users_pkey PRIMARY KEY (usertoken)
-)
+);
 	
 	
 Drop TABLE IF EXISTS BLOG CASCADE;
