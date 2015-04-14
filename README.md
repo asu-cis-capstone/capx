@@ -89,3 +89,11 @@ Release Notes
 - Added admin feature: set project inactive
 - Added admin feature: add tags to project
 - Added admin feature: able to change description before submission
+
+**Release 0.6**
+
+- Added a *tests* folder that contains 10 different automated testing items that were created by the team
+- Continued to add logo images to the *logos* folder 
+- Various additions to the site
+ - Admin Panel: Added a "Printable Projects" feature (allows client to create a signup form for students)
+ - Logo images can now be submitted as part of the propose project form
