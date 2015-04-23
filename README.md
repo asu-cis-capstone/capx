@@ -36,6 +36,7 @@ How to Install (with GitHub Login)
 How to Setup Amazon Web Services (S3)
 =======================
 S3 is used to store company logos that are uploaded via the project submission form on www.cis440.com's propose project page. Please follow the instructions below to get S3 working with the site.
+
 1. Install the boto extension to make a connection to S3 using python (from terminal, use pip install boto)
 2. Setup a bucket on S3 and give it a name.
 3. 
