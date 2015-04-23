@@ -32,6 +32,13 @@ How to Install (with GitHub Login)
 ==================
 1. Follow the same steps listed in the "How to Install (without GitHub Login)" section and while modifying the app.py file in step three, you'll also need to modify the following line of code to match the Client ID and Client Secret to match the ones that you were provided if you've registered your application with Github:
 ![What to Edit](https://github.com/STruong1/CIS440-ScreenShots/blob/master/Images/Screen%20Shot%202015-02-17%20at%209.09.10%20PM.png)
+
+How to Setup Amazon Web Services (S3)
+=======================
+S3 is used to store company logos that are uploaded via the project submission form on www.cis440.com's propose project page. Please follow the instructions below to get S3 working with the site.
+1. Install the boto extension to make a connection to S3 using python (from terminal, use pip install boto)
+2. Setup a bucket on S3 and give it a name.
+3. 
  
 Contributors 
 =======================
