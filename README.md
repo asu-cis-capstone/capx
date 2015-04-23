@@ -39,7 +39,8 @@ S3 is used to store company logos that are uploaded via the project submission f
 
 1. Install the boto extension to make a connection to S3 using python (from terminal, use pip install boto)
 2. Setup a bucket on S3 and give it a name.
-3. 
+3. Add your **AWS_Access_Key_Id** and **AWS_Secret_Access_Key** to your app config
+4. Establish a connection to S3 using the **boto.connect_s3(ACCESS_KEY_ID_HERE, SECRET_KEY_HERE)**
  
 Contributors 
 =======================
