@@ -1,4 +1,4 @@
-/* SQL QUERIES */
+/* SQL QUERIES CAPX*/
 
 DROP TABLE IF EXISTS PROJECT2 CASCADE;
 
@@ -20,8 +20,10 @@ CREATE TABLE project2
   interested character varying[],
   extension character varying(10),
   editstatus character varying(3),
+  uploadlink character varying(150),
   CONSTRAINT project2_pkey PRIMARY KEY (id)
 );
+
 
   
 DROP TABLE IF EXISTS USERS CASCADE;
@@ -53,4 +55,4 @@ CREATE TABLE blog
   editstatus character varying(3),
   active character varying(3) DEFAULT 'yes'::character varying,
   CONSTRAINT blog_pkey PRIMARY KEY (id)
-)
+);

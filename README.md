@@ -6,8 +6,7 @@ Overview
  
 Develop a website specifically for the CIS 440 Capstone class. The site will allow both students and companies to post project opportunities. In addition, there will be an area that shows various past projects. Students will be able to view all available projects and rank them with a up/downvote system. Students will also be able to sign up for projects directly on the site. Each project will have information provided by the company as well as Dr. Clark's comments. Additionally, each project will have tags, giving a quick overview of the desired coding language, required technologies and other characteristics.
  
-**Beta Testing**
- https://capxtest.herokuapp.com/
+**Beta Testing**: www.cis440.com
  
  (more info coming soon!)
  
@@ -33,6 +32,15 @@ How to Install (with GitHub Login)
 ==================
 1. Follow the same steps listed in the "How to Install (without GitHub Login)" section and while modifying the app.py file in step three, you'll also need to modify the following line of code to match the Client ID and Client Secret to match the ones that you were provided if you've registered your application with Github:
 ![What to Edit](https://github.com/STruong1/CIS440-ScreenShots/blob/master/Images/Screen%20Shot%202015-02-17%20at%209.09.10%20PM.png)
+
+How to Setup Amazon Web Services (S3)
+=======================
+S3 is used to store company logos that are uploaded via the project submission form on www.cis440.com's propose project page. Please follow the instructions below to get S3 working with the site.
+
+1. Install the boto extension to make a connection to S3 using python (from terminal, use pip install boto)
+2. Setup a bucket on S3 and give it a name.
+3. Add your **AWS_Access_Key_Id** and **AWS_Secret_Access_Key** to your app config
+4. Establish a connection to S3 using the **boto.connect_s3(ACCESS_KEY_ID_HERE, SECRET_KEY_HERE)**
  
 Contributors 
 =======================
@@ -89,3 +97,11 @@ Release Notes
 - Added admin feature: set project inactive
 - Added admin feature: add tags to project
 - Added admin feature: able to change description before submission
+
+**Release 0.6**
+
+- Added a *tests* folder that contains 10 different automated testing items that were created by the team
+- Continued to add logo images to the *logos* folder 
+- Various additions to the site
+ - Admin Panel: Added a "Printable Projects" feature (allows client to create a signup form for students)
+ - Logo images can now be submitted as part of the propose project form
