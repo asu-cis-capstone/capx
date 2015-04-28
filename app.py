@@ -1,13 +1,17 @@
 import psycopg2, requests, json, markdown, os
 from flask.ext.github import GitHub
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_from_directory
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, send_from_directory, Response
 import datetime
 from flaskext.markdown import Markdown
 from werkzeug import secure_filename
+from hashlib import sha1
+import time, base64, hmac, urllib
+import boto
+from boto.s3.key import Key
 
 
 def connect_db():
-	g.conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="5432")
+	g.conn = psycopg2.connect(database="MODIFY", user="MODIFY", password="MODIFY", host="MODIFY", port="MODIFY")
 	g.cur = g.conn.cursor()
 	
 def close_db():
@@ -20,18 +24,11 @@ app = Flask(__name__)
 app.config['GITHUB_CLIENT_ID'] = 'MODIFY'
 app.config['GITHUB_CLIENT_SECRET'] = 'MODIFY'
 app.secret_key = 'MODIFY'
+app.config['AWS_ACCESS_KEY_ID'] = 'MODIFY'
+app.config['AWS_SECRET_ACCESS_KEY'] = 'MODIFY'
 
 Markdown(app)
 github = GitHub(app)
-
-app.config['UPLOAD_FOLDER'] = 'static/images'
-app.config['ALLOWED_EXTENSIONS'] = set(['png', 'jpeg', 'jpg', 'gif'])
-
-def allowed_file(filename):
-	return '.' in filename and \
-		filename.rsplit('.', 1)[1] in app.config['ALLOWED_EXTENSIONS']
-
-
 
 # Variables
 
@@ -75,16 +72,6 @@ def index():
 	# pull all blog posts, show the most recent
 	g.cur.execute("select * from Blog where active = 'yes' order by datecreated desc, timecreated desc;")
 	blogs = g.cur.fetchall()
-
-	# newlist = list('test')
-	# for counter in range(0, len(blogs)):
-		# newlist[counter] = blogs[counter][2]
-
-
-	# for counter in range (0, len(blogs)):
-		# newlist[counter] = Markup(markdown.markdown(newlist[counter]))
-
-	# blogBody = newlist
 
 	close_db()
 
@@ -147,13 +134,14 @@ def logout():
 	session.pop('userName', None)
 	session.clear()
 	flash('You successfully logged out!')
-	return redirect(url_for('index', _external=True, _scheme='https'))
+	return redirect(url_for('index', _external=True))
 	
 # Admin route
 @app.route('/adminpanel')
 def adminpanel():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		#return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
 		logincheck = '_loggedin'
@@ -172,15 +160,7 @@ def authorized(oauth_token):
 	j = requests.get('https://api.github.com/user?access_token=' + session['oauth'])
 	j = json.loads(j.content.decode('utf-8'))
 	session['userName'] = j['login']
-	
-	
-	
-	
-	# if session['userName'] == 'AlexNeumann':
-		# session['adminCheck'] = 'yes'
-	# if session['userName'] == 'STruong1':
-		# session['adminCheck'] = 'yes'
-	
+		
 	# check if current user is already in database with the corresponding githubname
 	g.cur.execute("SELECT githubname FROM users WHERE githubname= %(user)s;", {'user': session['userName']})
 	user = g.cur.fetchone()
@@ -208,7 +188,7 @@ def authorized(oauth_token):
 		session['adminCheck'] = 'yes'
 	
 	close_db()
-	return redirect(url_for('index', _external=True, _scheme='https'))
+	return redirect(url_for('index', _external=True))
 	
 # Upvote route
 # This route is executed whenever a user upvotes a project on the Project page
@@ -288,16 +268,48 @@ def downvote():
 # Propose project route		
 @app.route('/proposeproject', methods = ['POST', 'GET'])
 def proposeproject():
-	# start by processing the uploaded image and storing the file extension (PNG, jpeg, jpg, gif)
-	# file = request.files['file']
-	# if file and allowed_file(file.filename):
-		# filename = secure_filename(file.filename)
-		# print(filename)
+	connect_db()
+	# Find the highest project Id, cast to int
+	g.cur.execute("select id from project2 order by id desc limit 1;")
+	maxid = g.cur.fetchone()
+	print (maxid)
+	maxid = int(maxid[0])
+	# Add 1 to max id 
+	maxid = maxid + 1
+	maxid = str(maxid)
 
-		
-		#store the file extension type. ex. png, jpeg, jpg
-		# extension = filename.rsplit('.',1)[1]
+	# Connect to Amazon S3
+	s3 = boto.connect_s3(app.config['AWS_ACCESS_KEY_ID'], app.config['AWS_SECRET_ACCESS_KEY'])
+	
+	# Get a handle to the S3 bucket
+	bucket_name = 'cis440images'
+	print (bucket_name)
+	bucket = s3.get_bucket(bucket_name)
+	k = Key(bucket)
 
+	# Loop over the list of files from the HTML input control
+	data_files = request.files.getlist('file')
+	print(data_files[0])
+	
+
+	for data_file in data_files:
+		if data_file.filename == '':
+			uploadUrl = "../static/capx.jpeg"
+		else:
+			# Read the contents of the file
+			file_contents = data_file.read()
+
+			# Use Boto to upload the file to the S3 bucket
+			originalFileName = data_file.filename
+			print('Original name: ' + originalFileName)
+			# Create a unique file name based on the current project ID and the original upload name
+			newFileName = maxid + originalFileName
+			k.key = newFileName
+			k.content_type ='image/jpeg'
+			print ("Uploading some data to " + bucket_name + " with key: " + k.key)
+			uploadUrl = "https://cis440images.s3.amazonaws.com/" + newFileName
+			print(uploadUrl)
+			k.set_contents_from_string(file_contents)	
 
 	firstName = request.form.get('firstname', None)
 	lastName = request.form.get('lastname', None)
@@ -320,33 +332,14 @@ def proposeproject():
 	print (projectTitle)
 	print (description)
 	
-	connect_db()
-	g.cur.execute("INSERT INTO PROJECT2 (company, description, rating, dateCreated, semester, contact, email, phone, active, title) VALUES (%(company)s, %(description)s, 0, %(date)s, %(semester)s, %(contact)s, %(email)s, %(phone)s, 'no', %(title)s);", {'company': company, 'description': description, 'date': currentDate, 'semester': semester, 'contact': contact, 'email': email, 'phone': phone, 'title':projectTitle})
+	
+	g.cur.execute("INSERT INTO PROJECT2 (company, description, rating, dateCreated, semester, contact, email, phone, active, title, uploadlink) VALUES (%(company)s, %(description)s, 0, %(date)s, %(semester)s, %(contact)s, %(email)s, %(phone)s, 'no', %(title)s, %(link)s);", {'company': company, 'description': description, 'date': currentDate, 'semester': semester, 'contact': contact, 'email': email, 'phone': phone, 'title':projectTitle, 'link': uploadUrl})
 	g.conn.commit()
 	
-	#fetch the id of the newly created project, convert to string
-	g.cur.execute("SELECT id from PROJECT2 where description = %(description)s AND title = %(ptitle)s;", {'description': description, 'ptitle':projectTitle})
-	id = g.cur.fetchone()
-	
-	id = str(id)
-	id = id.rsplit(',',1)[0]
-	id = id.rsplit('(',1)[1]	
-	
 	close_db()
+	flash('You successfully submitted a project!')
 	
-	
-	# file = request.files['file']
-	# if file and allowed_file(file.filename):
-		# filename = secure_filename(file.filename)
-		# print(filename)
-				
-		# #set custom file name and add extension
-		# filename = "project" + id + "." + extension
-		
-		# file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		
-	
-	return redirect(url_for('index', _external=True, _scheme='https'))
+	return redirect(url_for('index', _external=True))
 
 # Express interest in project route
 @app.route('/expressInterest', methods = ['POST', 'GET'])
@@ -385,7 +378,7 @@ def expressInterest():
 @app.route('/adminBlog')
 def adminBlog():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
 		logincheck = '_loggedin'
@@ -397,7 +390,7 @@ def adminBlog():
 @app.route('/adminBlogEdit')
 def adminBlogEdit():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
 		logincheck = '_loggedin'
@@ -415,7 +408,7 @@ def adminBlogEdit():
 @app.route('/blogedit', methods = ['POST', 'GET'])
 def blogedit():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	
 	currentDate = datetime.date.today()
 	time = datetime.datetime.now()
@@ -449,7 +442,7 @@ def blogedit():
 @app.route('/blogentry', methods = ['POST', 'GET'])		
 def blogentry():	
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	blogtitle = request.form.get('blogtitle', None)
 	blogpost = request.form.get('blogpost', None)
 	
@@ -473,7 +466,7 @@ def blogentry():
 @app.route('/adminProject')
 def adminProject():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	connect_db()
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
@@ -490,17 +483,26 @@ def adminProject():
 @app.route('/addcomment', methods = ['POST', 'GET'])		
 def addcomment():	
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	projectid = request.form.get('commentid', None)
 	comment = request.form.get('addedcomment', None)
 	comment = str(comment)
+	
+	
 	newdescription = request.form.get('addeddescription', None)
 	newdescription = str(newdescription)
+	
+	connect_db()
+	g.cur.execute("SELECT description FROM project2 WHERE id = %(id)s;",{'id':projectid})
+	olddescription = g.cur.fetchone()
+	olddescription = olddescription[0]
+	print(olddescription)
+	close_db()
 	
 	print(newdescription)
 	
 	editStatus = ''
-	if newdescription == '':
+	if newdescription == olddescription:
 		editStatus = 'no'
 	else:
 		editStatus = 'yes'
@@ -517,8 +519,12 @@ def addcomment():
 	print (projectid)
 	
 	connect_db()
-	g.cur.execute("UPDATE project2 SET active = 'yes', comments = %s, tags = %s, description = %s, editstatus = %s WHERE id = %s;", (comment, tags, newdescription, editStatus, projectid))
-	g.conn.commit()
+	if editStatus == 'yes':
+		g.cur.execute("UPDATE project2 SET active = 'yes', comments = %s, tags = %s, description = %s, editstatus = %s WHERE id = %s;", (comment, tags, newdescription, editStatus, projectid))
+		g.conn.commit()
+	else:
+		g.cur.execute("UPDATE project2 SET active = 'yes', comments = %s, tags = %s, editstatus = %s WHERE id = %s;", (comment, tags, editStatus, projectid))
+		g.conn.commit()
 	close_db()
 	flash('You successfully approved a project!')
 	return redirect('/adminProject')
@@ -527,7 +533,7 @@ def addcomment():
 @app.route('/adminPromote', methods = ['POST', 'GET'])
 def adminPromote():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	connect_db()
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
@@ -544,7 +550,7 @@ def adminPromote():
 @app.route('/createAdmin', methods = ['POST', 'GET'])
 def createAdmin():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	githubname = request.form.get('createAdmin', None)
 	print ('Trying to promote...' + githubname)
 	
@@ -572,7 +578,7 @@ def createAdmin():
 @app.route('/adminRoster', methods = ['POST', 'GET'])
 def adminRoster():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	connect_db()
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
@@ -589,7 +595,7 @@ def adminRoster():
 @app.route('/adminInactive', methods = ['POST', 'GET'])
 def adminInactive():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	connect_db()
 	adminStatus = 'active1'
 	if session['blnLoggedIn'] == "yes":
@@ -608,12 +614,11 @@ def adminInactive():
 @app.route('/inactivateProject', methods = ['POST', 'GET'])
 def inactivateProject():
 	if session['adminCheck'] != 'yes':
-		return redirect(url_for('index', _external=True, _scheme='https'))
+		return redirect(url_for('index', _external=True))
 	
 	projectId = request.form.get('projectId', None)
 	projectId = int(projectId)
 	
-	print('Test')
 	connect_db()
 	g.cur.execute("UPDATE project2 SET active = 'no' WHERE id = %(id)s;", {'id':projectId})
 	g.conn.commit()
@@ -624,7 +629,26 @@ def inactivateProject():
 	
 	return redirect('/adminInactive')
 
-
+# Admin Feature: Printer friendly projects
+@app.route('/adminPrint')
+def adminPrint():
+	if session['adminCheck'] != 'yes':
+		return redirect(url_for('index', _external=True))
+	connect_db()
+	adminStatus = 'active1'
+	if session['blnLoggedIn'] == "yes":
+		logincheck = '_loggedin'
+	else:
+		logincheck = ''
+		
+	connect_db()
+	g.cur.execute("SELECT id, company, title, description, contact, email, phone, rating FROM project2 WHERE active = 'yes' ORDER BY rating desc;")
+	result = g.cur.fetchall()
+	
+	close_db()
+	
+	return render_template('adminPrintProjects.html', adminStatus=adminStatus, logincheck=logincheck, userName=session['userName'], admin=session['adminCheck'], result = result)
+		
 	
 if __name__ == '__main__':
 	app.run(debug=True)

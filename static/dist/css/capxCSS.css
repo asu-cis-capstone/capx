@@ -267,7 +267,8 @@ label {
 
 .companylogo{
 	width: 150px; 
-	height: 75; 
+	height: 75px; 
+	margin-bottom: 5px;
 }
 
 .extrainfo{

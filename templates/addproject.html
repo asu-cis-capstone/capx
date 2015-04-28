@@ -19,12 +19,11 @@
 		<div class="row">
 			<div class="col-md-12">
 			<h3>Here are some general guidelines for a suitable project:</h3>
-			<li>Projects must involve some type of software development</li>
-			<li>There should be a point of contact or contacts that will work closely with students to provide continuous feedback on the proposed project as it is being worked on, throughout the semester.</li>
+			<li>Projects must involve some type of software development -- web, mobile, or standalone application(s)</li>
+			<li>There should be a point of contact or contacts that will be available to provide continuous feedback on the student team's work throughout the semester.</li>
 			<li>Reasonably sized - projects should not be so large in size that it prevents students from having a somewhat shippable product by the end of the semester.</li>
-			<li>Students have a total of six milestones before the final project release (please follow <a href="https://github.com/asu-cis-capstone/course-info/blob/master/project_assignments.md">this</a> link to view milestones).</li>
-			<li>Part, or all of the project <strong>must</strong> be open source. Students will be using GitHub for collaboration purposes. Although, anything that is a trade secret can be kept offline and closed, so this shouldn't pose a problem.</li>
-			<li>The project must be real work, even if it will not be fully completed and implemented in one semester. A prototype or beta version can be acceptable, but a project without a client, or that isn't deliverable and testable, is not.</li>
+			<li>Part, or all of the project <strong>must</strong> be open source. Students will be using GitHub for collaboration purposes. Parts of the project that are trade secrets can be kept offline and closed.</li>
+			<li>The project must be real work, even if it will not be fully completed and implemented in one semester. A prototype or beta version can be acceptable, but a project without a client, or that isn't testable, is not.</li>
 			</div>
 		</div>
 	</div>
@@ -34,6 +33,8 @@
 			<div class="col-md-12">
 			<h3>Propose a Project:</h3>
 			Fields marked with * are required
+			
+							
 				<form action="/proposeproject" method="post" name="propose" accept-charset="utf-8" enctype="multipart/form-data">
                     <div class="modal-body" style="padding: 5px;">
                           <div class="row">
@@ -53,8 +54,7 @@
                                     <input class="form-control" name="phone" pattern="[0-9]{1,20}" placeholder="Phone # no symbols" type="text" />
                                 </div>
                             </div>
-							
-							
+													
 							
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
@@ -71,38 +71,12 @@
 							
 							<div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-                                     <!--Company Logo - Allowed extensions .png, .jpeg, .jpg, .gif <input type="file" name="file">-->
+								    Company Logo - Allowed extensions .png, .jpeg, .jpg, .gif </br>
+									For optimal results: Width 150px, Height 75px with white or transparent background<input type="file" name="file">
                                 </div>
                             </div>
 							
-							<!-- <div class="row">
-                                <div class="col-lg-12 col-md-12 col-sm-12" style="padding-bottom: 10px;">
-									<INPUT TYPE="checkbox" NAME="HTML" 
-									onClick="return KeepCount()"> HTML
-
-									<INPUT TYPE="checkbox" NAME="CSS" 
-									onClick="return KeepCount()"> CSS
-
-									<INPUT TYPE="checkbox" NAME="Java" 
-									onClick="return KeepCount()"> Java
-
-									<INPUT TYPE="checkbox" NAME="Python" 
-									onClick="return KeepCount()"> Python
-
-									<INPUT TYPE="checkbox" NAME="CSharp" 
-									onClick="return KeepCount()"> C#
-									
-									<INPUT TYPE="checkbox" NAME="Django" 
-									onClick="return KeepCount()"> Django
-									
-									<INPUT TYPE="checkbox" NAME="iOSMobile" 
-									onClick="return KeepCount()"> iOS Mobile
-									
-									<INPUT TYPE="checkbox" NAME="Android" 
-									onClick="return KeepCount()"> Android
-							   </div>
-                            </div> -->
-                           
+						                           
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 col-sm-12">
                                     <textarea maxlength="300" style="resize:vertical;" class="form-control" placeholder="* Brief Project description. Max 300 characters..." rows="6" name="comment" required></textarea>
@@ -125,7 +99,7 @@
 		</div>
 		
 	<SCRIPT LANGUAGE="javascript">
-
+	
 	function KeepCount() {
 
 	var NewCount = 0

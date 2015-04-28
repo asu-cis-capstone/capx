@@ -1,0 +1,61 @@
+{% extends 'base_navigation' + logincheck + '.html' %}
+{% block content %}	
+
+	<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12" id="sitenav">
+					<div class="container">
+							<div class="row">
+							
+								<p class="header6">
+										<a href="adminpanel">Back to Admin Panel</a>
+								</p>
+							</div>
+					</div>
+				</div>
+			</div>
+	</div>
+	
+	<div class="container" style="background-color: white; color: #2a2a2a;">
+		<div class="row">
+			<div class="col-md-10">
+				<h3>Printable Projects - Please copy/paste into Word document</h3>
+				<h4>Projects are ordered by rating (most popular first) and only approved projects are displayed</h4>
+				</br>
+				{% for row in result: %}
+				<div class="row">
+					<div class="col-md-12">
+						<span style="font-size: 120%; font-weight: bold; color: #4d67d8; ">{% print row[1] %}</span> - {% print row[2] %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<span style="font-weight: bold">Contact: </span> {% print row[4] %}  |  
+						<span style="font-weight: bold">Email: </span> {% print row[5] %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<span style="font-weight: bold">Description: </span> {% print row[3] %}
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12" style="Background-color: white; margin-top: 5px; line-height: 2em; ">
+					<span style="font-weight: bold">First name | last name | GitHub account: </span></br>
+						Member 1: _______________________ GitHub: ______________________ </br>
+						Member 2: _______________________ GitHub: ______________________ </br>
+						Member 3: _______________________ GitHub: ______________________ </br>
+						Member 4: _______________________ GitHub: ______________________ </br>
+						Member 5: _______________________ GitHub: ______________________ </br>
+					</div>
+				</div>
+				</br></br>
+				{% endfor %}
+					</table>
+			</div>		
+		</div>
+	</div>
+	
+	
+	
+{% endblock %}
